@@ -1,0 +1,14 @@
+﻿@*<MudNavMenu>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Width="250px">Home</MudNavLink>
+    <MudNavLink Href="/Pages/CustomPages/FullMenu" Match="NavLinkMatch.All">Menu</MudNavLink>
+    <MudNavGroup Title="Sign In" @bind-Expanded="_isExpanded" >
+        <MudNavLink Href="/Pages/CustomPages/LogIn">Log In</MudNavLink>
+        <MudNavLink Href="/Pages/CustomPages/Register">Register</MudNavLink>
+    </MudNavGroup>
+</MudNavMenu>
+
+@code {
+    bool _isExpanded = true;
+
+}
+*@

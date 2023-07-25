@@ -1,0 +1,67 @@
+﻿@page "/Pages/CustomPages/Test"
+
+@using DataAccess.Models.Branch;
+@using DataAccess.Models.Customer;
+
+@inject IOrderData  _order
+@inject OrderState  _state
+
+
+
+<h3>Test</h3>
+
+<style>
+    .testTable{
+        border: 1px solid;
+    }
+    .testTable th{
+        border: 1px solid;
+    }
+    .testTable td{
+        border: 1px solid;
+    }
+    .testOverLay{
+        width: 250px;
+        height: 200px;
+        padding: 5%;
+    }
+</style>
+
+<MudOverlay Visible="isVisible" DarkBackground="true" Absolute="true">
+    <MudCard Class="testOverLay">
+        
+            <MudText Style="padding-bottom: 5%">
+                A verification code has been sent to your email. Enter code to receive an email copy of your order receipt.
+            </MudText>
+            <MudDivider/>
+
+                <MudStack Row="true">
+
+                <MudTextField T="int?" Label="Enter Code:">
+                </MudTextField>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(e => ToggleOverlay(false))">Submit</MudButton>
+
+                </MudStack>
+
+    </MudCard>
+</MudOverlay>
+
+
+<MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(e => ToggleOverlay(true))">Show Overlay</MudButton>
+
+
+@code {
+
+    private bool isVisible;
+
+    public void ToggleOverlay(bool value)
+    {
+        isVisible = value;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+}

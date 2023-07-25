@@ -1,0 +1,198 @@
+﻿@using DataAccess.Models.Branch;
+
+@inject IOrderData _order
+@inject OrderState _state
+
+
+<style>
+    .addressMainContainer {
+        min-width:      max(500px, 30%);
+        max-width:      90%;
+        position:       absolute;
+        top:            50%;
+        left:           50%;
+        transform:      translate(-50%, -50%);
+        padding:        2%;
+    }
+</style>
+
+<MudCard Class="addressMainContainer">
+    <MudForm Model="@_state.Customer" @ref="form" @bind-IsValid="success">
+        <MudGrid Spacing="1">
+
+            <MudItem xs="10">
+                <MudCardHeader>Confirm Info</MudCardHeader>
+            </MudItem>
+
+            <MudDivider />
+
+            @*First Name*@
+            <MudItem xs="5">
+                <MudTextField 
+                    @bind-Value="_state.Customer.FirstName" 
+                    Label="First Name" 
+                    Required="true"
+                    RequiredError="First Name is required"
+                    InputType="InputType.Text"
+                    For="() => _state.Customer.FirstName"
+                    T="string" 
+                    Variant="Variant.Outlined" 
+                    />
+            </MudItem>
+
+            @*Last Name*@
+            <MudItem xs="5">
+                <MudTextField 
+                    @bind-Value="_state.Customer.LastName" 
+                    Label="Last Name" 
+                    Required="true"
+                    RequiredError="Last Name is required"
+                    InputType="InputType.Text"
+                    For="() => _state.Customer.LastName"
+                    T="string" 
+                    Variant="Variant.Outlined" />
+            </MudItem>
+
+            @*Phone Number*@
+            <MudItem xs="5">
+                <MudTextField 
+                    @bind-Value="_state.Customer.Phone" 
+                    Label="Phone Number"
+                    Required="true"
+                    RequiredError="Phone Number is required"
+                    InputType="InputType.Telephone"
+                    For="() => _state.Customer.Phone"
+                    T="string" 
+                    Variant="Variant.Outlined" />
+            </MudItem>
+
+            @*Email*@
+            <MudItem xs="5">
+                <MudTextField 
+                    @bind-Value="_state.Customer.Email" 
+                    Label="Email Address" 
+                    InputType="InputType.Email"
+                    For="() => _state.Customer.Email"
+                    T="string" 
+                    Variant="Variant.Outlined" />
+            </MudItem>
+
+            <MudText>
+                (Delivery Only)
+            </MudText>
+                
+            @*Address*@
+                <MudItem xs="10">
+                    <MudTextField 
+                        @bind-Value="_state.Customer.AddressLine" 
+                        Label="Address Line" 
+                        Required="_state._isCarryout == false"
+                        RequiredError="Address required for delivery"
+                        For="() => _state.Customer.AddressLine"
+                        T="string" 
+                        Disabled="_state._isCarryout == true"
+                        Variant="deliveryColor" />
+                </MudItem>
+
+                @*City*@
+                <MudItem xs="5">
+                    <MudTextField 
+                        @bind-Value="_state.Customer.City"
+                        Label="City"
+                        Required="_state._isCarryout == false"
+                        RequiredError="Please enter city"
+                        For="() => _state.Customer.City"
+                        Disabled="_state._isCarryout == true"
+                        T="string"
+                        Variant="deliveryColor" />
+                </MudItem>
+
+                @*State*@
+                <MudItem xs="2">
+                    <MudSelect 
+                        @bind-Value="_state.Customer.StateId"
+                        Label="State"
+                        Required="_state._isCarryout == false"
+                        RequiredError="Please enter state"
+                        For="() => _state.Customer.StateId"
+                        T="int?" 
+                        
+                        Disabled="_state._isCarryout == true"
+                        Variant="deliveryColor">
+                        @if(States == null)
+                        {
+                            <MudText> Loading </MudText>
+                        }
+                        else
+                        {
+                            @foreach (var state in States)
+                            {
+                            <MudSelectItem @bind-Value="state.Id" T="int?">@state.Name</MudSelectItem>
+                            }
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                @*Zip Code*@
+                <MudItem xs="3">
+                    <MudTextField 
+                        @bind-Value="_state.Customer.Zip"
+                        Label="Zip Code"
+                        Required="_state._isCarryout == false"
+                        RequiredError="Please enter zip code"
+                        For="() => _state.Customer.Zip"
+                        Disabled="_state._isCarryout == true"
+                        T="string"
+                        
+                        Variant="deliveryColor" />
+                </MudItem>
+
+            <MudDivider />
+
+            <MudButton OnClick="(() => PageChange(1))">
+                Back
+            </MudButton>
+            <MudButton 
+                OnClick="GoNext">
+                Continue to Payment
+            </MudButton>
+
+        </MudGrid>
+    </MudForm>
+</MudCard>
+
+@code {
+
+    [Parameter]
+    public EventCallback<int> SetSelectedPage { get; set; }
+
+    MudForm form;
+    private protected IEnumerable<State>? States;
+
+    private Variant deliveryColor => _state._isCarryout == false ? Variant.Outlined : Variant.Filled;
+
+    bool success;
+
+    private async Task GoBack()
+    {
+        PageChange(1);
+        form.ResetValidation();
+    }
+    private async Task GoNext()
+    {
+        await form.Validate();
+        if (form.IsValid)
+            PageChange(3);
+        
+    }
+    private void PageChange(int pg)
+    {
+        SetSelectedPage.InvokeAsync(pg);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        States = await _order.GetStates();
+    }
+    
+
+}

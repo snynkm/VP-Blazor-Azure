@@ -1,0 +1,214 @@
+﻿@page "/Pages/CustomPages/Forms/OrderTypeSelection"
+
+@using DataAccess
+@using DataAccess.Data
+@using DataAccess.Models
+@using DataAccess.DbAccess
+@using DataAccess.Models.Branch
+
+@inject IOrderData          _data
+@inject OrderState          _state
+@inject NavigationManager   _nav
+
+<style>
+    #ots-mainContainer{
+        background-image:   url("images/start_order.jpg");
+        background-size:    cover;
+        background-repeat:  no-repeat;
+        min-height:         100%;
+        min-width:          100%;
+        position:           absolute;
+        display:            flex;
+        flex-direction:     column;
+        align-items:        center;
+    }
+
+    #ots-sub1-container {
+        max-width:          min(500px, 100%);
+        min-width:          max(400px, 40%);
+        max-height:         80%;
+        min-height:         max(400px, 40%);
+        text-align:         center;
+        align-items:        center;
+        transform:          translateY(20%);
+    }
+    #ots-crs-container{
+        width:              600px;
+        height:             400px;
+        display:            flex;
+    }
+    .fontLarge{
+        font-size:          2em;
+        font-weight:        bold;
+    }
+    .ots-button-group{
+        position:           sticky;
+        padding-top:        2%;
+        padding-bottom:     1%;
+    }
+    paddingSmall{
+        padding:            2%;
+    }
+    .paddingSize{
+        max-height:         95%;
+        max-width:          95%;
+    }
+    .pushRight{
+        margin-left:        auto;
+    }
+    .otsContinueButton{
+        font-size:          larger;
+        font-weight:        bold;
+        margin:             4%;
+    }
+
+</style>
+
+<MudCard id="ots-mainContainer" Elevation="0">
+
+    @*Buttons*@
+    <MudCard id="ots-sub1-container">
+        
+        
+        <MudItem xs="12" Class="fontLarge" Style="padding: 5%;">
+            START YOUR ORDER
+        </MudItem>
+
+        
+        <MudItem xs="12">
+
+            <MudButtonGroup Class="ots-button-group" Style="background-color:darkorange"
+                
+                Size="Size.Large"
+                Variant="Variant.Filled">
+                    
+                @*Carryout Button*@
+                    <MudItem xs="6">  
+                        <MudButton @onclick="(() => _state.SetCarryoutTrue())"
+                            Class="paddingSize rounded"
+                            Style="background-color:floralwhite">
+                                <MudText Class="fontLarge ">CARRYOUT</MudText>
+                                <MudIcon Icon="@Icons.Material.Filled.Store" Size="Size.Large"></MudIcon>
+                        </MudButton>
+                    </MudItem>
+
+                    @*Delivery Button*@
+                    <MudItem xs="6">
+                        <MudButton @onclick="(() => _state.SetCarryoutFalse())"
+                            Class="paddingSize rounded"
+                            Style="background-color:floralwhite">
+                                <MudText Class="fontLarge button">DELIVERY</MudText>
+                                <MudIcon Icon="@Icons.Material.Filled.RollerSkating" Size="Size.Large"></MudIcon>
+                        </MudButton>
+                    </MudItem>
+
+            </MudButtonGroup>
+
+        </MudItem>
+
+        @*Form Section*@
+        @if (_state._isCarryout == true)
+        {
+            <MudForm Model="_state.OrderItem">
+                <MudCard Style="margin-top: 4%">
+
+                    Select pickup location:
+
+                    <MudCard Style="margin-left:10%; margin-right:10%; margin-top:2%" Elevation="0">
+                        <MudSelect @bind-value="@_state.OrderItem.BranchId"
+                                
+                                Label="Store Location"
+                                Required="_state._isCarryout == true"
+                                For="(() => _state.OrderItem.BranchId)"
+                                RequiredError="Selection required for carryout"
+                                T="int"
+                                Variant="Variant.Outlined">
+                                    @if (Branches == null) { }
+                                    else
+                                    {
+                                        @foreach (var branch in Branches)
+                                        {
+                                            <MudSelectItem @bind-Value="branch.Id">@branch.City Branch</MudSelectItem>
+                                        }
+                                    }
+                        </MudSelect>
+
+                        @if (selectedBranch == null) { }
+                        else
+                        {
+                            <MudCard Style="text-align:center; font-size: small; padding:2%" Elevation="0">
+                                <MudText>@selectedBranch.AddressLine</MudText>
+                                <MudText>@selectedBranch.City, @selectedState, @selectedBranch.Zip</MudText>
+                                <MudText>@selectedPhone</MudText>
+                            </MudCard>
+                        }
+
+                    </MudCard>
+
+                    <MudButton @onclick="ConfirmCarryout" Class="otsContinueButton rounded-pill" Variant="Variant.Filled" Disabled="!_isBranchSelected">Continue as Carryout</MudButton>
+                </MudCard>
+            </MudForm>
+
+        }
+        else if (_state._isCarryout == false)
+        {
+            <MudForm Model="_state.OrderItem">
+                <MudCard>
+
+                    <MudCard Style="margin-left:10%; margin-right:10%; margin-top: 5%; font-style:italic; color:dimgray" Elevation="0">
+                        (Input address at Checkout...)
+                    </MudCard>
+
+                    <MudButton @onclick="ConfirmDelivery" Class="otsContinueButton rounded-pill" Variant="Variant.Filled">Continue as Delivery</MudButton>
+                </MudCard>
+            </MudForm>
+        }
+        else{
+            <br/>
+        }
+
+    </MudCard>
+
+</MudCard>
+
+@code {
+
+    private protected IEnumerable<State>? States;
+    private protected IEnumerable<Branch>? Branches;
+
+    private protected Branch? selectedBranch => Branches?.FirstOrDefault(x => x.Id == _state.OrderItem?.BranchId);
+    private protected string? selectedState => States?.FirstOrDefault(x => x.Id == selectedBranch?.StateId)?.Name;
+    private protected string? selectedPhone => Branches?.FirstOrDefault(x => x.Id == _state.OrderItem?.BranchId)?.Phone;
+    private bool _isBranchSelected => _state.OrderItem?.BranchId != 0;
+
+
+    private async Task ConfirmCarryout()
+    {
+        await _state.SetCarryoutTrue();
+        _nav.NavigateTo("/Pages/CustomPages/Menu");
+    }
+    private async Task ConfirmDelivery()
+    {
+        await _state.SetCarryoutFalse();
+        _nav.NavigateTo("/Pages/CustomPages/Menu");
+    }
+
+    private async Task<string> FormatPhone(string? phone)
+    {
+        if (!string.IsNullOrEmpty(phone))
+            return string.Format("({0}) {1}-{2}", phone.Substring(0, 3), phone.Substring(3, 3), phone.Substring(6, 4));
+        else
+            return "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        States = await _data.GetStates();
+        Branches = await _data.GetBranches();
+
+//        if(_state.OrderItem?.BranchId == 0)
+ //           _state.OrderItem.BranchId = 1;
+        
+    }
+
+}

@@ -1,0 +1,106 @@
+﻿@page "/Pages/CustomPages/Forms/Login"
+
+@using VpBlazorApp.Components;
+
+@inject OrderState          _ss
+@inject NavigationManager   _nm
+
+<style>
+    .loginMainContainer{
+        width:          350px;
+        max-width:      80%;
+        position:       absolute;
+        top:            50%;
+        left:           50%;
+        transform:      translate(-50%, -50%);
+        padding:        0;
+    }
+    .inputField{
+        align-items:    center;
+        align-self:     center;
+        
+    }
+    .inputButton{
+        width:          60%;
+    }
+    .centered{
+        align-self:     center;
+        display:        grid;
+    }
+    .inputButton:hover{
+        color:          orangered;
+    }
+    .link {
+        padding:        2%;
+    }
+</style>
+
+<MudCard Class="loginMainContainer">
+
+   <MudForm>
+
+        <MudItem xs="10">
+            <MudCardHeader>Have an Account? Sign In to activate Rewards Points!</MudCardHeader>
+            <MudText>Or click register for a new account.</MudText>
+        </MudItem>
+        <br/>
+        <MudStack Spacing="2">
+            <MudTextField Class="inputField" T="string" Label="Username" Variant="Variant.Filled"></MudTextField>
+            <MudTextField Class="inputField" T="string" Label="Password" Variant="Variant.Filled"></MudTextField>
+
+            <MudButton 
+                Class="inputButton centered" 
+                Variant="Variant.Filled" 
+                Color="Color.Primary">
+                Sign In
+            </MudButton>
+
+            <MudButton 
+                Class="inputButton centered" 
+                OnClick="(() => PageChange(1))"
+                Variant="Variant.Filled" 
+                Color="Color.Surface">
+                Check out as Guest
+            </MudButton>
+
+        </MudStack>
+        
+        <br/>
+        <MudDivider />
+
+        <MudItem xs="12">
+            <MudLink 
+                Class="link">
+                Register new account
+            </MudLink>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudLink 
+                Class="link">
+                Forgot username or password?
+            </MudLink>
+        </MudItem>
+
+   </MudForm>
+
+</MudCard>
+
+@code {
+
+
+    private void GuestCheckout()
+    {
+        
+    }
+    private void PageChange(int pg)
+    {
+        SetSelectedPage.InvokeAsync(pg);
+        _ss.SetGuestTrue();
+    }
+
+    [Parameter]
+    public EventCallback<int> SetSelectedPage { get; set; }
+
+
+}

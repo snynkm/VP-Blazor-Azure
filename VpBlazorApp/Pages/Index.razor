@@ -1,0 +1,177 @@
+﻿@page "/"
+
+@using DataAccess.Models.Branch;
+@using DataAccess.Resources;
+@using VpBlazorApp.Components;
+
+@inject NavigationManager   _nav
+
+<style>
+    #iconLogo{
+        content:            url("images/vp_logo.png");
+        max-width:          80%;
+    }
+
+    #iconPizza{
+        content:            url("images/icon_pizza.png");
+        max-width:          20%;
+        max-height:         50%;
+    }
+
+    .crsContainer {
+        width:              100%;
+        height:             100%;
+        background-repeat:  no-repeat;
+        background-position:center;
+        background-size:    cover;
+    }
+
+    .crsImg {
+        min-height:         100%;
+        min-width:          100%;
+        max-width:          110%;
+    }
+
+    .infoGrid{
+        padding-left:       5%;
+        padding-right:      5%;
+    }
+
+
+    .indexButton {
+        width:              200px;
+        height:             60px;
+    }
+
+
+    .indexButton:hover{
+        color:              orangered
+    }
+    .ul{
+        line-height:        1.5em;
+    }
+    #infoImg{
+        content:            url("images/pizza_shop.jpg");
+        width: 100%;
+    }
+    .infoImgContainer{
+        overflow:           hidden;
+        max-width:          min(420px, 100%);
+        max-height:         300px;
+        display:            flex;
+        justify-content:    center;
+        align-items:        center;
+        margin: 0;
+
+               
+    }
+    .indexMainContainer{
+        min-width:          max(80%, 80vw);
+        min-height:         100vh;
+        position:           sticky;
+    }
+    
+
+    .infoContainer{
+        min-height:         100%;
+        background-color:   rgba(255,255,255,0.7)
+    }
+    .infoSubContainer{
+        display:            flex;
+        justify-content:    space-around;
+        flex-wrap:          wrap;
+        background-color:   floralwhite;
+        margin:             5%;
+    }
+    .bodyTextContainer{
+        max-width:          min(400px, 100%);
+        display:            flex;
+        flex-direction:     column;
+        justify-content:    center;
+        align-items:        center;
+        min-height:         100%;
+        background-color:   floralwhite;
+        padding:            2%;
+
+    }
+    .bodyText{
+        font-family:        Garamond;
+        font-size:          large;
+        padding:            2%;
+        text-align:         center; 
+        
+    }
+</style>
+
+<MudGrid Class="indexMainContainer" Spacing="0">
+
+
+    @*Carousel Left*@
+    <MudItem xs="5" Style="margin:0">
+
+        <MudCarousel Class="crsContainer" ShowArrows="false" ShowBullets="false" AutoCycle="true" TData="object">
+
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_wall.jpg" Class="crsImg" /></MudCarouselItem>
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_pizza_slice.jpg" Class="crsImg" /></MudCarouselItem>
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_eating.jpg" Class="crsImg" /></MudCarouselItem>
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_chef_cooking.jpg" Class="crsImg" /></MudCarouselItem>
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_pizza_cooking.jpg" Class="crsImg" /></MudCarouselItem>
+            <MudCarouselItem Transition="Transition.Slide"><MudImage Src="images/crs_pizza_pan.jpg" Class="crsImg" /></MudCarouselItem>
+
+        </MudCarousel>
+
+    </MudItem>
+
+    @*Carousel Right*@
+    <MudItem xs="7">
+
+        <MudPaper Class="infoContainer" Square="true" Elevation="0">
+
+                @* Vennato's Pizza & Icon' *@
+                <MudStack Row="true" Spacing="0" Style="padding:2%">
+                    <img id="iconLogo"/>
+                    <img id="iconPizza"/>
+                </MudStack>
+
+                @* Pizza Shop, Shop Info*@
+
+                    <MudItem xs="12" Style="display:flex; justify-content:center;">
+                        
+                        <MudStack Spacing="2" Row="true">
+                    <MudButton Variant="Variant.Filled" OnClick="@(() => _nav.NavigateTo("/Pages/CustomPages/Locations"))" Color="Color.Primary" Class="indexButton rounded-pill "> LOCATIONS </MudButton>
+                    <MudButton Variant="Variant.Filled" OnClick="@(() => _nav.NavigateTo("/Pages/CustomPages/Forms/OrderTypeSelection"))" Color="Color.Primary" Class="indexButton rounded-pill " Target="/Pages/CustomPages/OrderTypeSelection"> ORDER NOW <MudIcon Icon=@Icons.Material.Filled.KeyboardArrowRight /></MudButton>
+                        </MudStack>
+
+                    </MudItem>
+
+
+                    <MudCard Class="infoSubContainer" Elevation="0">
+
+                        <MudCard Class="infoImgContainer" Elevation="0"><MudImage id="infoImg" /></MudCard>
+
+                        <MudCard Class="bodyTextContainer"  Elevation="0">
+                            
+                            <MudCard Elevation="2" Style="padding:10%">
+
+                                <MudCard Class="bodyText" Elevation="0">
+                                    The most delicous pizza joint on the block! Come on down to Vennato's Pizza and grab a cheesy slice of goodness.
+                                    Treat yourself to <i>great music</i>, <i>great vibes</i>, and the <i>best pizza</i> around town! 
+                                </MudCard> 
+                                <MudCard Class="bodyText" Elevation="0">- Demo Times Weekly </MudCard>
+
+                            </MudCard>
+
+                        </MudCard>
+
+                    </MudCard>
+
+        </MudPaper>
+
+    </MudItem>
+
+</MudGrid>
+
+@code {
+
+    
+}

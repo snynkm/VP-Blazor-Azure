@@ -1,0 +1,118 @@
+﻿@using VpBlazorApp.Components;
+
+@inherits Checkout
+
+@inject OrderState _state
+
+<style>
+    .paymentMainContainer {
+        width:      400px;
+        max-width:  80%;
+        position:   absolute;
+        top:        50%;
+        left:       50%;
+        transform:  translate(-50%, -50%);
+        padding:    2%;
+    }
+</style>
+<MudCard Class="paymentMainContainer">
+
+    <MudForm>
+
+        <MudGrid Spacing="1">
+
+            <MudItem xs="10">
+                <MudCardHeader>Confirm Payment</MudCardHeader>
+            </MudItem>
+
+            <MudDivider/>
+
+            <MudRadioGroup @bind-SelectedOption="_state.OrderItem.PaymentType" T="int">
+                <MudRadio
+                    @onclick="_state.SetPaymentCash"
+                    Option="1"
+                    T="int">
+                    Cash
+                </MudRadio>
+                <MudRadio
+                    @onclick="_state.SetPaymentCredit"
+                    Option="2"
+                    T="int">
+                    Card
+                </MudRadio>
+            </MudRadioGroup>
+
+            @if(_state.OrderItem.PaymentType == 2)
+            {
+                <MudItem xs="9">
+                    <MudTextField 
+                        @bind-Value="cardName"
+                        Label="Cardholder's Name"
+                        T="string" 
+                        Disabled="true"
+                        Variant="Variant.Filled">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="9">
+                    <MudTextField 
+                        @bind-Value="cardNum"
+                        Label="Card Number"
+                        T="string" 
+                        Disabled="true"
+                        Variant="Variant.Filled">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="4">
+                    <MudTextField 
+                        @bind-Value="cardDate"
+                        Label="Exp Date" 
+                        T="string" 
+                        Disabled="true"
+                        Variant="Variant.Filled">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="3">
+                    <MudTextField 
+                        @bind-Value="cvcCode"
+                        Label="CVC"
+                        T="string" 
+                        Disabled="true"
+                        Variant="Variant.Filled">
+                    </MudTextField>
+                </MudItem>
+            }
+            <MudDivider />
+
+                <MudButton OnClick="(() => PageChange(2))">
+                Back
+            </MudButton>
+
+                <MudButton OnClick="(() => PageChange(4))">
+                Continue to Order Confirmation
+            </MudButton>
+
+        </MudGrid>
+        
+    </MudForm>
+
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<int> SetSelectedPage { get; set; }
+
+    private string cardNum = "#### #### #### ####";
+    private string cardName = "Demo Test Name";
+    private string cvcCode = "###";
+    private string cardDate = "XX/XX";
+
+    private void PageChange(int pg)
+    {
+        SetSelectedPage.InvokeAsync(pg);
+    }
+}

@@ -1,0 +1,19 @@
+﻿@using VpBlazorApp.Components;
+
+@inherits Checkout
+
+@inject OrderState _ss
+
+<MudForm>
+    <MudTextField T="string" Label="Username" />
+    <MudTextField T="string" Label="Email" />
+    <MudTextField T="string" Label="Password" HelperText="Choose a strong password"/>
+    <MudTextField T="string" Label="Password" HelperText="Re-enter password" />
+
+</MudForm>
+
+@code {
+
+    bool success;
+
+}

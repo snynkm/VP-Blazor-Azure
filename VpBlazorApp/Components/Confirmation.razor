@@ -1,0 +1,56 @@
+﻿
+@inject OrderState          _state;
+@inject NavigationManager   _nav;
+
+<style>
+    .confirmationMainContainer{
+        min-width:      max(250px, 30%);
+        max-width:      min(300px, 60%);
+        min-height:     max(300px, 40%);
+        max-height:     min(400px, 80%);
+        position:       absolute;
+        top:            50%;
+        left:           50%;
+        transform:      translate(-50%, -50%);
+        padding:        2%;
+    }
+    #confirmIcon{
+        min-width:      max(100px, 10%);
+        min-height:     max(100px, 10%);
+        max-height:     min(200px, 20%);
+        max-width:      min(200px, 20%);
+    }
+</style>
+
+    @if(_state._IsOrderSuccess == true)
+    {
+        <MudCard Class="confirmationMainContainer" Elevation="0">
+            <MudCard Style="align-items:center; justify-content:center; display:flex" Elevation="0">
+                <MudImage Src="/images/order_success_icon.png" id="confirmIcon"></MudImage>
+            </MudCard>
+            <MudText Style="font-size: 1.4em; text-align:center; margin-top: 3%; margin-bottom:3%"> Your Order Has Been Placed! </MudText>
+
+            <MudDivider/>
+
+            <MudText Style="text-align:center; font-weight:bold; margin-top: 4%">Order Numer: </MudText>
+
+            <div style="position:fixed; bottom: 5%; right: 5%">
+                <MudLink Style="align-self:end" @onclick="ReturnToMain">Return to Main Menu</MudLink>
+            </div>
+
+        </MudCard>
+    }
+    
+
+
+@code {
+
+    private async Task ReturnToMain()
+    {
+        _state._IsOrderSuccess = false;
+        await _state.ResetCart();
+        _nav.NavigateTo("/");
+    }
+
+}
+

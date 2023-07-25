@@ -1,0 +1,352 @@
+﻿
+
+@using DataAccess.Models.Menu;
+@using DataAccess.Models.Order;
+@using DataAccess.Services;
+@using VpBlazorApp.Pages.CustomPages
+@using VpBlazorApp.Components
+
+@inject ISnackbar           _snack
+@inject NavigationManager   _nav
+@inject OrderState          _state
+
+<style>
+    .bold{ 
+        font-weight:        bolder;
+    }
+    .cart{
+        min-height:         15vh;
+        max-height:         600px;
+        min-width:          300px;
+        max-width:          15vw;
+        color:              lightgray;
+        position:           absolute;
+    }
+    .pushBottom{
+        position:           relative;
+        margin-bottom:      auto;
+
+    }
+    .relative{
+        position:           relative;
+    }
+    .centered {
+        align-items:        center;
+        justify-content:    center;
+        display:            flex;
+    }
+    .cartContent .isFull{
+        height:             270px;
+        max-height:         60%;
+
+    }
+    .isEmpty{
+        color:              darkgray;
+        font-size:          large;
+        min-height:         150px;
+    }
+    .maxSize {
+        width:              100%;
+        height:             100%;
+    }
+    .noPadding{
+        padding:            0;
+    }
+    .option:hover{
+        color:              orangered;
+    }
+    .overflow{
+        overflow:           hidden;
+    }
+    .smallPadding{
+        padding-top:        1%;
+    }
+
+    .flexHorizontal {
+        display:            flex;
+        align-content:      flex-start;
+        align-items:        end;
+    }
+
+    .flexLeft {
+        display:            flex;
+        justify-content:    left;
+        align-content:      flex-start;
+        align-items:        initial;
+    }
+
+    .maxSize {
+        width:              100%;
+        height:             100%;
+    }
+
+    .pushRight {
+        margin-left:        auto;
+    }
+
+    .subtotalContainer {
+        position:           relative;
+    }
+
+    .subtotalField {
+        position:           relative;
+        bottom:             0;
+    }
+
+    .fontStyle {
+        font-family:        'Times New Roman', Times, serif;
+    }
+
+    .maxHeight {
+        max-height:         100%;
+    }
+
+    .fontSmall {
+        font-size:          small;
+    }
+
+    .fontXSmall {
+        font-size:          x-small;
+    }
+
+    .cartImgContainer {
+        min-height:         50px;
+        min-width:          50px;
+        max-height:         50px;
+        max-width:          40px;
+    }
+
+    .overflow {
+        overflow:           hidden;
+    }
+
+    .overflowY {
+        overflow-y:         scroll;
+    }
+
+    .smallPadding {
+        padding:            1%;
+    }
+
+    .smallMargin {
+        padding:            2%;
+    }
+
+    .sizeInherit {
+        width:          inherit;
+        height:         inherit;
+    }
+
+    .capitalize {
+        text-transform: capitalize;
+    }
+
+    .noMargin {
+        margin:             0;
+    }
+
+    .noPadding {
+        padding:            0;
+    }
+
+
+</style>
+
+@*Icon*@
+<MudIconButton 
+    Icon="@Icons.Material.Filled.ShoppingCart" 
+    aria-label="Shopping Cart"
+               OnClick="@ToggleCartOpen"
+               Color="@IconColor"/>
+
+<MudPopover  Class="cart noPadding" Open="@_isOpen" Fixed="true" Elevation="7" AnchorOrigin="Origin.BottomRight">
+
+        <MudPaper Class="cartContent smallPadding" Elevation="0">
+                
+                @if (_state._isCartEmpty == true)
+                {
+                    <MudPaper Class="maxSize centered bold isEmpty" Style="background-color:whitesmoke" Elevation="0">
+
+                            Cart is Empty...
+
+                    </MudPaper>
+                }
+                else
+                {
+                    foreach(var item in _state.CartItems)
+                    {
+                            @* Image | CartItem | Edit *@
+                            <MudStack Row="true" Class="smallPadding fontSmall smallMargin overflowY" Spacing="1" Style="background-color:floralwhite">
+
+                                @*Image*@
+                                <MudItem xs="2" Class="cartImgContainer">
+                                    <MudCard Elevation="0" Class="overflow maxSize">
+                                        <MudImage Class="sizeInherit overflow"
+                                          ObjectFit="ObjectFit.Cover"
+                                          Src="@item.UrlExtension">
+                                        </MudImage>
+                                    </MudCard>
+                                    <MudText Style="font-family:Garamond; font-weight:bold; font-size: large">#@item.OrderLineId</MudText>
+                                </MudItem>
+
+                                @*CartItem*@
+                                <MudItem xs="9" Class="maxSize smallPadding">
+
+                                    @* CartItem: Info(top) / Info(bottom) *@
+                                    <MudStack Spacing="0">
+
+                                        @*Info(top): Name | Toppings *@
+                                        <MudStack Row="true" Spacing="0" Class="flexLeft">
+
+                                            @*Name*@
+                                            <MudItem Class="capitalize">
+                                            (@item.SizeName) @item.SpecialName (@item.CategoryName)
+                                            </MudItem>
+
+                                            @*Toppings*@
+                                            <MudItem xs="6" Class="pushRight ">
+
+                                                <MudText Class="fontSmall">
+                                                    <table>
+                                                        @foreach (var topping in item?.Toppings)
+                                                        {
+                                                            <MudChip Size="MudBlazor.Size.Small">@topping.Name</MudChip>
+                                                        }
+                                                    </table>
+                                                </MudText>
+                                            </MudItem>
+
+                                        </MudStack>
+
+                                        @*Info(bottom): Qty | Price*@
+                                        <MudStack Row="true" Class="flexHorizontal maxHeight">
+
+                                            @*Qty*@
+                                            Qty:
+                                            <MudNumericField Class="noMargin fontXSmall"
+                                                Style="height:20px"
+                                                @bind-Value="@item.Quantity"
+                                                IconSize="MudBlazor.Size.Small"
+                                                Min="1"
+                                                Max="5">
+                                            </MudNumericField>
+
+                                            @*Price*@
+                                            <MudItem Class="pushRight">
+                                                $@((item?.Price + item?.Toppings?.Sum(x => x.PriceMod)) * item?.Quantity)
+                                            </MudItem>
+
+                                        </MudStack>
+                                    </MudStack>
+
+                                </MudItem>
+
+
+                                @*Remove Item Button*@
+                                <MudIconButton 
+                                    Style="max-height: 50px"
+                                    Icon="@Icons.Material.Filled.Clear"
+                                    Variant="Variant.Text"
+                                    OnClick="(() => RemoveCartItem(item.OrderLineId))"
+                                    ButtonType="ButtonType.Reset">
+                                </MudIconButton>
+
+                            </MudStack>
+                     }
+                }
+        </MudPaper>
+
+        <MudDivider/>
+        <MudDivider/>
+
+        <MudItem xs="12">
+            @if(@_state._isCartEmpty == true) { }
+            else
+            {
+
+                    <MudText Style="font-weight:bolder; font-size:large; color:darkred; text-align:center; padding: 2%; background-color:whitesmoke">
+                        Subtotal:  $@_state.CartSubtotal
+                    </MudText>
+
+            }
+        </MudItem>
+
+        <MudItem Class="relative">
+
+
+            <MudStack Class="pushDown" Row="true" Spacing="0">
+
+                @*Checkout*@
+                <MudItem xs="6" Class="centered option">
+                    <MudButton 
+                        Variant="Variant.Filled"
+                        Disabled="@_state._isCartEmpty"
+                        Color="Color.Primary"
+                        Class="maxSize option fw-bold"
+                        OnClick="ToCheckout">
+                        Checkout
+                    </MudButton>
+                </MudItem>
+
+                @*Continue Shopping*@
+                <MudItem xs="6" >
+                    <MudButton Class="option maxSize"
+                        Variant="Variant.Outlined"
+                           OnClick="ToggleCartOpen">
+                        Continue Shopping
+                    </MudButton>
+                </MudItem>
+
+            </MudStack>
+        </MudItem>
+
+</MudPopover>
+
+
+@code {
+
+
+    public Color IconColor => _state._isCartEmpty ? Color.Tertiary : Color.Secondary;
+
+    private bool _isOpen;
+
+    protected async Task RemoveCartItem(int? olid)
+    {
+        _state.CartItems?.Remove(_state.CartItems?.First(c => c.OrderLineId == olid));
+        ReassignCart();
+
+        if (_state._isCartEmpty)
+        {
+            await _state.SetCartEmpty();
+            _nav.NavigateTo("/Pages/CustomPages/Menu");
+            _snack.Add("Cart is empty. Add items before checking out.");
+        }
+
+    }
+
+    public void ToCheckout()
+    {
+        _nav.NavigateTo("/Pages/CustomPages/Checkout");
+        ToggleCartOpen();
+    }
+
+    public void ReassignCart()
+    {
+        int olId = 1;
+        foreach(var item in _state.CartItems)
+        {
+            item.OrderLineId = olId;
+            olId++;
+        }
+    }
+
+    public void ToggleCartOpen()
+    {
+        StateHasChanged();
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+
+}

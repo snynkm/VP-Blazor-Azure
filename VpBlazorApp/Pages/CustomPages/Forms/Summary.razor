@@ -1,0 +1,396 @@
+﻿@using DataAccess.Services;
+@using DataAccess.Models.Customer;
+@using DataAccess.Models.Order;
+@using DataAccess.Models.Branch;
+@using VpBlazorApp.Components;
+
+@inherits Checkout
+
+@inject IOrderData          _data
+@inject IOrderService       _service
+@inject OrderState          _state
+@inject NavigationManager   _nav
+
+<style>
+    
+    .summaryMainContainer {
+        position:           relative;
+        max-width:          min(95%, 500px);
+        min-width:          40%;
+        min-height:         60%;
+        max-height:         90%;
+        top:                50%;
+        left:               50%;
+        transform:          translate(-50%, -50%);
+        padding:            2%;
+        overflow:           hidden;
+    }
+
+    .summarySubMainContainer{
+        overflow-y:         scroll;
+        max-width:          100%;
+        max-height:         400px;
+        position:           relative;
+
+    }
+
+    .summaryItemImgContainer{
+        min-height:         50px;
+        min-width:          50px;
+        max-height:         50px;
+        max-width:          50px;
+        overflow:           hidden;
+    }
+
+    .summaryItemImgContainer{
+        object-fit:         cover;
+    }
+
+    .submitOrderButton {
+        margin-left:        auto;
+    }
+    .submitOrderButton :hover{
+        color:              orangered;
+    }
+    .summaryTable{
+        width:              90%;
+    }
+    summaryTable tr td:first-child{
+        width:              30%;
+        text-align:         left;
+    }
+    summaryTable tr td:last-child{
+        width:              60%;
+        text-align:         right;
+    }
+    .couponRow{
+        width:              90%;
+        max-height:         40px;
+        display:            flex;
+        align-items:        initial;
+    }
+    .summarySubMainHeader{
+        height:30px;
+        background-color:   lightgray;
+        font-size:          medium;
+        padding-left:       5%;
+    }
+
+    #summaryOverlay {
+        width:              250px;
+        height:             200px;
+        padding:            5%;
+    }
+
+</style>
+
+@*Main Container*@
+<MudCard Class="summaryMainContainer" Elevation="0">
+
+    <MudCardHeader>Confirm Order Summary</MudCardHeader>
+
+    <MudDivider/>
+
+    @*Main Subcontainer*@
+    <MudItem xs="12" Class="summarySubMainContainer">
+
+        @*Info*@
+        <MudCard Outlined="false" Elevation="0">
+
+            <MudItem xs="12">
+            <MudCardHeader Class="summarySubMainHeader">Info</MudCardHeader>
+            </MudItem>
+
+            <MudStack Row="true" Spacing="0">
+            
+                <MudItem xs="1" ></MudItem>
+            
+                <MudItem xs="11" >
+                    <table class="small">
+                        @if (_state.Customer == null)   {  }
+                        else
+                        {
+                            <tr>Checkout Type: Guest</tr>
+                            <tr>Name: @_state.Customer.FirstName @_state.Customer.LastName</tr>
+                            <tr>Phone: @if (_state.Customer.Phone != null) { @customerPhone }</tr>
+                            <tr>Email Address: @_state.Customer.Email</tr>
+                            <br/>
+                            @if (_state._isCarryout == false)
+                            {
+                                <MudText Class="small">Order Type: DELIVERY</MudText>
+                                <MudText Class="small">Delivery Address: @_state.Customer.AddressLine, @_state.Customer.City, @_state.Customer.Zip</MudText>
+                            }
+                            else
+                            {
+                                <MudText Class="small">Order Type: CARRYOUT</MudText>
+                                <MudText Class="small">Pickup Location: @selectedBranch?.City Store</MudText>
+                                <MudText Class="small">@selectedBranch?.AddressLine, @selectedBranch?.City, @States?.FirstOrDefault(x => x.Id == selectedBranch?.Id)?.Name @selectedBranch?.Zip</MudText>
+                                <MudText Class="small"> @if (selectedBranch?.Phone != null) { @branchPhone }</MudText>
+                            }
+                        }
+                    </table>
+                    <br/>
+                </MudItem>
+
+            </MudStack>
+
+        </MudCard>
+            
+        @*Payment*@
+        <MudCard Outlined="false" Elevation="0" Class="small">
+
+            <MudItem xs="12">
+                <MudCardHeader Class="summarySubMainHeader">Payment & Summary</MudCardHeader>
+            </MudItem>
+
+            <MudItem xs="12">
+                    
+                <br/>
+                @if (_state.CartItems == null)
+                {
+                    <MudText>Cart is Empty</MudText>
+                }
+                else
+                {
+                    @foreach (var mi in _state.CartItems)
+                    {
+                        <MudStack Row="true" >
+                            
+                                @*Image*@
+                                <MudItem xs="2" Style="overflow: hidden">
+                                    <MudCard Class="summaryItemImgContainer">
+                                        <MudImage 
+                                            Class="summaryItemImgContainer"
+                                            Src="@mi.UrlExtension"
+                                            Height="100"
+                                            />
+                                    </MudCard>
+                                </MudItem>
+
+                                @*Item Description*@
+                                <MudItem xs="3" ><MudText Class="small"> (@mi.SizeName) @mi.SpecialName @mi.CategoryName </MudText></MudItem>
+
+                                @*Toppings*@
+                                <MudItem xs="3" >
+                                        @if (mi.Toppings == null) { }
+                                        else
+                                        {
+                                            foreach (var tp in mi.Toppings)
+                                            {
+                                                <MudText Class="small"> - @tp.Name</MudText>
+                                            }
+                                        }
+                                </MudItem>
+
+                                @*Quantity*@
+                                <MudItem xs="2" >
+                                    <MudText Class="small">Qty: @mi.Quantity</MudText>
+                                </MudItem>
+
+                                @*PRICING NEEDS FIX*@
+
+                                @*Price*@
+                                <MudItem xs="2" >
+                                    <MudText Class="small bold">$@((mi.Price + mi.Toppings?.Sum(x => x.PriceMod)) * mi.Quantity)</MudText>
+                                </MudItem>
+
+
+                        </MudStack>
+
+                        <MudDivider/>
+                        
+                    }
+                }
+                <br />
+
+                <MudItem xs="11" Style="display:flex; justify-content:flex-end"><MudLink Color="Color.Info" Href="/Pages/CustomPages/Menu">Continue Shopping</MudLink></MudItem>
+
+
+                <MudItem xs="12">
+                    <MudDivider DividerType="DividerType.FullWidth"/>
+                </MudItem>
+                <br />
+
+                @*Coupon*@
+                <MudItem Class="couponRow">
+
+                    <MudCard Elevation="0" Outlined="false">Coupon Code:</MudCard>
+
+                    <input type="text" style="border: 1px solid darkgray" Class="couponRowItem rounded"/>
+                    
+                    <MudButton Class="couponRowItem" Variant="Variant.Outlined">Apply</MudButton>
+
+                </MudItem>
+
+                <br/>
+
+            </MudItem>
+
+            @*Subtotal*@
+            <MudStack Row="true">
+
+                <MudItem xs="1"></MudItem>
+                <MudItem xs="11">
+
+                    <table class="summaryTable">
+
+                        <tr>
+                            <td>Payment Type: </td>
+                            @switch (_state.OrderItem?.PaymentType)
+                            {
+                                case 0: <td> Cash</td>
+                                    break;
+                                case 1: <td> Card</td>
+                                    break;
+                            }
+                        </tr>
+
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td>$@_state.CartSubtotal</td>
+                        </tr>
+                        <tr>
+                            <td>Discount:</td>
+                            @if (_state.OrderItem?.DiscountId == null)
+                            {
+                                <td>-</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        </tr>
+                        <tr>
+                            <td>Tax:</td>
+                            <td>$@_state.CartTax</td>
+                        </tr>
+                        <MudDivider/>
+                        <tr>
+                            <td>Total:</td>
+                            <td><MudText Class="large bold" Color="Color.Warning">$@_state.CartTotal</MudText></td>
+                        </tr>
+
+                    </table>
+
+                </MudItem>
+
+            </MudStack>
+
+        </MudCard>
+
+        <br/>
+        <MudItem xs="12">
+            <MudDivider DividerType="DividerType.FullWidth" />
+        </MudItem>
+        <br />
+
+    </MudItem>
+
+    <br/>
+
+    <MudStack Row="true">
+    <MudButton OnClick="(() => PageChange(3))">
+        Back
+    </MudButton>
+
+        <MudButton
+            @onclick="SubmitOrder"
+            Class="submitOrderButton rounded-pill"
+            Color="Color.Primary"
+            Disabled="_submitButtonDisabled"
+            Size="Size.Large"
+            Variant="Variant.Filled">
+            Submit Order
+        </MudButton>
+
+    </MudStack>
+
+</MudCard>
+
+<MudOverlay Visible="_isVisible" DarkBackground="true" Absolute="true">
+    <MudCard id="summaryOverlay">
+
+        <MudText Style="padding-bottom: 5%">
+            A verification code has been sent to your email. Enter code to receive an email copy of your order receipt.
+        </MudText>
+        <MudDivider />
+
+        <MudStack Row="true">
+
+            <MudTextField T="int?" Label="Enter Code:">
+            </MudTextField>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(e => ToggleOverlay(false))">Submit</MudButton>
+
+        </MudStack>
+
+    </MudCard>
+</MudOverlay>
+
+@code {
+
+    private bool _isVisible;
+    private bool _submitButtonDisabled = false;
+
+    public void ToggleOverlay(bool value)
+    {
+        _isVisible = value;
+    }
+
+    private protected IEnumerable<State>? States;
+    private protected IEnumerable<DataAccess.Models.Branch.Branch>? Branches;
+    private protected string? customerPhone;
+    private protected string? branchPhone;
+
+    private protected DataAccess.Models.Branch.Branch? selectedBranch =>
+        Branches?.FirstOrDefault(x => x.Id == _state.OrderItem?.BranchId);
+
+    private Task<string> FormatPhone(string? phone)
+    {
+        string updatedPhone;
+        if (!string.IsNullOrEmpty(phone))
+            return Task.FromResult(updatedPhone = string.Format("({0}) {1}-{2}", phone.Substring(0, 3), phone.Substring(3, 3), phone.Substring(6, 4)));
+        else
+            return Task.FromResult("");
+    }
+
+    [Parameter]
+    public EventCallback<int> PageBack { get; set; }
+
+    private void PageChange(int pg)
+    {
+        PageBack.InvokeAsync(pg);
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        States = await _data.GetStates();
+        Branches = await _data.GetBranches();
+
+        customerPhone = await FormatPhone(_state.Customer?.Phone);
+        branchPhone = await FormatPhone(selectedBranch?.Phone);
+    }
+
+    public async Task SubmitOrder()
+    {
+
+
+
+        // * DISABLED FOR DEMO PURPOSES//
+        // * 
+        var customer = await _service.ConvertToGuest(_state.Customer);
+        var customerId = await _data.InsertGuestReturnKey(customer); // Guest Table Insert w/ Key
+        var order = await _service.BuildOrder(_state, customerId);
+        var orderId = await _data.InsertOrderReturnKey(order); // Order Table Insert w/ Key
+        var menuItemOrder = await _service.BuildMenuItemOrder(_state.CartItems, orderId);
+        await _data.InsertMenuItemOrder(menuItemOrder); // MenuItemOrder Table Insert w/ Key
+        var menuItemOrderTopping = await _service.BuildMenuItemOrderTopping(_state.CartItems, orderId);
+        await _data.InsertMenuItemOrderTopping(menuItemOrderTopping); // MenuItemOrderTopping Table Insert w/ Key
+
+        _submitButtonDisabled = true;
+        await _state.SetOrderSuccessTrue();
+        ToggleOverlay(true);
+
+    }
+
+}

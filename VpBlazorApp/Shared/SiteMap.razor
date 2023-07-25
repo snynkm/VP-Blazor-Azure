@@ -1,0 +1,143 @@
+﻿
+
+<style>
+    
+    .siteMapMainContainer{
+        background-color: rgba(250,250,250,0.9);
+        padding: min(2%, 15px);
+        font-family: Arial;
+    }
+    .siteMapMainHeaders{
+        font-family: Candara;
+        font-weight: bold;
+        text-align: right;
+    }
+    .siteMapIconImg{
+        
+        max-height: min(8vh, 35px);
+    }
+
+    .siteMapIconContainer{
+        max-height: min(8vh, 35px);
+        max-width: min(8vh, 35px);
+    }
+
+    .siteMapTextLink{
+        font-size: small;
+        font-weight: 100;
+        font-family: Calibri;
+    }
+    .alignTop{
+        display:flex;
+        align-items: initial;
+    }
+
+</style>
+
+<MudItem xs="12" Class="siteMapMainContainer">
+    
+    <MudStack Row="true" Spacing="1">
+
+        
+
+        @*ABOUT*@
+        <MudItem xs="3">
+            
+            <MudStack Row="true">
+
+                <MudItem xs="6" Class="siteMapMainHeaders">ABOUT</MudItem>
+
+                <MudCard Style="background-color:lightgray" Elevation="0"><MudDivider Vertical="true" FlexItem="true" /></MudCard>
+
+                <MudItem xs="6">
+
+                    <MudText><MudLink Class="siteMapTextLink" Href="/" Color="Color.Primary" Underline="Underline.Hover">Home</MudLink></MudText>
+                    <MudText><MudLink Class="siteMapTextLink" Href="/Pages/CustomPages/Locations" Color="Color.Primary" Underline="Underline.Hover">Locations</MudLink></MudText>
+                    <MudText><MudLink Class="siteMapTextLink" Href="/Pages/CustomPages/Legal" Color="Color.Primary" Underline="Underline.Hover">Legal</MudLink></MudText>
+
+
+                </MudItem>
+
+            </MudStack>
+
+            
+        </MudItem>
+
+
+        @*SERVICES*@
+        <MudItem xs="3">
+
+            <MudStack Row="true">
+                
+                <MudItem xs="6" Class="siteMapMainHeaders">SERVICES</MudItem>
+
+                <MudCard Style="background-color:lightgray" Elevation="0"><MudDivider Vertical="true" FlexItem="true" /></MudCard>
+
+                <MudItem xs="6">
+
+                        <MudText><MudLink Class="siteMapTextLink" Href="/Pages/CustomPages/Menu" Color="Color.Primary" Underline="Underline.Hover">Menu</MudLink></MudText>
+                        <MudText><MudLink Class="siteMapTextLink" Href="/Pages/CustomPages/Forms/OrderTypeSelection" Color="Color.Primary" Underline="Underline.Hover">Order Online</MudLink></MudText>
+
+                </MudItem>
+
+            </MudStack>
+
+        </MudItem>
+
+        @*ACCOUNT*@
+        <MudItem xs="3">
+            <MudStack Row="true">
+
+                <MudItem xs="6" Class="siteMapMainHeaders">ACCOUNT</MudItem>
+
+                <MudCard Style="background-color:lightgray" Elevation="0"><MudDivider Vertical="true" FlexItem="true" /></MudCard>
+
+                <MudItem xs="6">
+
+                    <MudText><MudLink Class="siteMapTextLink" Color="Color.Primary" Href="/Pages/CustomPages/Forms/Login" Underline="Underline.Hover">Login</MudLink></MudText>
+                    <MudText><MudLink Class="siteMapTextLink" Color="Color.Primary" Underline="Underline.Hover">Register</MudLink></MudText>
+
+                </MudItem>
+
+            </MudStack>
+
+        </MudItem>
+
+        @*SOCIAL*@
+        <MudItem xs="3">
+
+            <MudStack Row="true">
+
+                <MudItem xs="6" Class="siteMapMainHeaders">SOCIAL</MudItem>
+
+                <MudCard Style="background-color:lightgray" Elevation="0"><MudDivider Vertical="true" FlexItem="true" /></MudCard>
+
+                <MudItem xs="6">
+
+                    <MudStack Row="true">
+
+                        <MudIconButton Class="siteMapIconContainer" Href="https://github.com/snynkm" Target="_blank">
+                            <MudImage Class="siteMapIconImg" Src="/images/github_icon.png" />
+                        </MudIconButton>
+
+                        <MudIconButton Class="siteMapIconContainer rounded-1" Href="https://www.linkedin.com/in/sean-kim-222576120/" Target="_blank">
+                            <MudImage Class="siteMapIconImg" Src="/images/linkedin_icon.png" />
+                        </MudIconButton>
+
+                    </MudStack>
+
+                </MudItem>
+
+            </MudStack>
+        </MudItem>
+
+
+    </MudStack>
+
+        <br/>
+
+</MudItem>
+
+@code {
+    
+}

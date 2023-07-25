@@ -1,0 +1,106 @@
+﻿@page "/Pages/CustomPages/Locations"
+@using DataAccess.Models.Branch;
+@using VpBlazorApp.Components;
+@using VpBlazorApp.Pages.CustomPages.Forms;
+
+
+@inject IOrderData _data
+
+<style>
+    .locationMainContainer{
+        background-image:       url("images/locations.jpg");
+        background-size:        cover;
+        background-repeat:      no-repeat;
+        background-position:    center bottom;
+        height:                 100%;
+        min-height:             100%;
+        min-width:              100%;
+        position:               absolute;
+        display:                inline-flex;
+        align-items:            center;
+        justify-content:        center;
+        
+    }
+    .locationSubContainer{
+        background-color:       rgba(35,35,35,0.9);
+        min-width:              max(30%, 400px);
+        min-height:             90%;
+        height:                 90%;
+    }
+
+
+</style>
+
+<MudCard Class="locationMainContainer" Elevation="0">
+    <MudCard Square="true" Class="locationSubContainer" Elevation="0">
+
+        <MudCard Style="background-color:transparent; color:white; text-align:center;" Elevation="0">
+
+            <MudText Style="font-weight: bold; text-align:center; padding: 5%; font-size:xx-large"> LOCATIONS: </MudText>
+                
+            @if(BranchesDTO == null) { <p> Loading... </p> }
+            else
+            {
+                @foreach (var branch in BranchesDTO)
+                {
+                    <MudCard Style="text-align:center; background-color:transparent; color:whitesmoke; max-height: 90%; " Elevation="0">
+                        <MudText Style="font-weight: bold;">@branch.City Branch</MudText>
+                        <MudText Style="font-weight: bold;">@branch.AddressLine</MudText>
+                        <MudText Style="font-weight: bold;">@branch.City, @branch.StateName Branch @branch.Zip</MudText>
+                        <MudText Style="font-weight: bold;">@FormatPhone(branch.Phone)</MudText>
+                    </MudCard>
+                    <br/>
+                }
+            }
+
+        </MudCard>
+
+   </MudCard>
+</MudCard>
+
+@*
+@if (BranchesDTO == null)
+{
+     <p> Loading... </p>
+}
+else
+{
+    <MudCard>
+        <MudCardHeader>Locations:</MudCardHeader>
+        <MudText>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Phone Number</th>
+                </tr>
+                @foreach (var branch in BranchesDTO)
+                {
+                    <tr>
+                        <td>@branch.City Branch</td>
+                        <td>@branch.AddressLine</td>
+                        <td>@branch.City</td>
+                        <td>@branch.StateName</td>
+                        <td>@FormatPhone(branch.Phone)</td>
+                    </tr>
+                }
+            </table>
+        </MudText>
+    </MudCard>
+}*@
+
+@code {
+    private protected IEnumerable<BranchDTO>? BranchesDTO;
+
+    public static string FormatPhone(string phone)
+    {
+        return $"({phone.Substring(0, 3)}) {phone.Substring(3, 3)}-{phone.Substring(6, 4)}";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BranchesDTO = await _data.GetBranchesDTO();
+    }
+}

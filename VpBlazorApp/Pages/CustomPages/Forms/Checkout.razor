@@ -1,0 +1,195 @@
+﻿@page "/Pages/CustomPages/Checkout"
+
+@using DataAccess.Models.Branch;
+@using DataAccess.Services;
+
+@inject IOrderData  _data
+@inject OrderState  _state
+
+
+<style>
+    .checkoutMainContainer 
+    {
+        background-image:   url("images/crs_checkout.jpg");
+        image-rendering:    optimizeSpeed;
+        object-fit:         contain;
+        min-height:         91vh;
+        position:           relative;
+    }
+
+    .noMargin{
+        margin:             0;
+    }
+
+    .crs{
+        height:             700px;
+
+    }
+
+    .crsItem{
+        width:              100%;
+    }
+
+    .tLineContainer{
+        background-color:   rgba(255,255,255,0.95);
+        min-height:         91vh;
+    }
+
+    .tLine{
+        height:             100%;
+    }
+
+    .overflow{
+        overflow:           hidden;
+        
+    }
+</style>
+
+<MudItem Class="checkoutMainContainer">
+
+    <MudGrid Spacing="0">
+
+        <MudItem xs="8" Class="noMargin padding overflow">
+            <MudCarousel 
+                Class="mud-width-full crs overflow" 
+
+                @bind-SelectedIndex="selectedPage"
+                ShowArrows="false" 
+                ShowBullets="false"
+                TData="object" 
+                AutoCycle="false">
+
+                    
+                    @*Account*@
+                    @*Page 1*@
+                    <MudCarouselItem 
+                        @bind-Value="@pageArray[0]"
+                        Class="crsItem" 
+                        Transition="Transition.Slide" 
+                        Color="@Color.Transparent">
+                            
+                            <Login SetSelectedPage="SetSelectedPage"/>
+
+                    </MudCarouselItem>
+
+                    @*OrderType*@
+                    @*Page 2*@
+                    <MudCarouselItem 
+                        @bind-Value="@pageArray[1]"
+                                 Class="crsItem"
+                        Transition="Transition.Slide"
+                        Color="@Color.Transparent">
+                                
+                            <OrderType SetSelectedPage="SetSelectedPage"/>
+
+                    </MudCarouselItem>
+
+                    @*Info*@
+                    @*Page 3*@
+                    <MudCarouselItem 
+                        @bind-Value="@pageArray[2]"
+                        Class="crsItem" 
+                        Transition="Transition.Slide" 
+                        Color="@Color.Transparent">
+
+                            <Info SetSelectedPage="SetSelectedPage"/>
+
+                    </MudCarouselItem>
+
+                    @*Payment*@
+                    @*Page 4*@
+                    <MudCarouselItem 
+                        @bind-Value="@pageArray[3]"
+                        Class="crsItem"
+                        Transition="Transition.Slide"
+                        Color="@Color.Transparent">
+                            
+                            <Payment SetSelectedPage="SetSelectedPage"/>
+
+                    </MudCarouselItem>
+
+                    @*Summary*@
+                    @*Page 5*@
+                    <MudCarouselItem 
+                        @bind-Value="@pageArray[4]"
+                        Class="crsItem"
+                        Transition="Transition.Slide" 
+                        Color="@Color.Transparent">
+
+                            <Summary PageBack="SetSelectedPage"/>
+
+                    </MudCarouselItem>
+
+            </MudCarousel>
+        </MudItem>
+
+        @*TimeLine*@
+        <MudItem xs="4" Class="tLineContainer">
+
+                <MudTimeline
+
+                    Class="tLine" TimelinePosition="TimelinePosition.Start">
+
+                        <MudTimelineItem @bind-Value="pageArray[0]"
+                            Color="@GetDotColor(pageArray[0])"
+                            Size="@GetDotSize(pageArray[0])"> 
+                            <MudText>Account</MudText>
+                        </MudTimelineItem>
+
+                        <MudTimelineItem @bind-Value="pageArray[1]"
+                            Color="@GetDotColor(pageArray[1])"
+                            Size="@GetDotSize(pageArray[1])">
+                            <MudText>Delivery Type</MudText>
+                        </MudTimelineItem>
+                    
+                        <MudTimelineItem @bind-Value="pageArray[2]"
+                            Color="@GetDotColor(pageArray[2])"
+                            Size="@GetDotSize(pageArray[2])">
+                            <MudText>Info</MudText>
+                        </MudTimelineItem>
+
+                        <MudTimelineItem @bind-Value="pageArray[3]"
+                            Color="@GetDotColor(pageArray[3])"
+                            Size="@GetDotSize(pageArray[3])">
+                            <MudText>Payment</MudText>
+                        </MudTimelineItem>
+
+                        <MudTimelineItem @bind-Value="pageArray[4]"
+                            Color="@GetDotColor(pageArray[4])"
+                            Size="@GetDotSize(pageArray[4])">
+                            <MudText>Confirmation</MudText>
+                        </MudTimelineItem>
+
+                </MudTimeline>
+        </MudItem>
+
+        <MudCard>
+            
+        </MudCard>
+
+    </MudGrid>
+</MudItem>
+
+@code {
+    //private string? dotColor = "ff0000";
+    private Color? dotColor;
+
+    public int selectedPage { get; set; } = 0;
+
+    private int[] pageArray = { 0, 1, 2, 3, 4 };
+
+    public void SetSelectedPage(int value) =>
+        selectedPage = value;
+
+    public Color GetDotColor(int slcPage)
+    {
+        return slcPage == selectedPage ? Color.Secondary : Color.Default;
+    }
+
+    public Size GetDotSize(int slcPage)
+    {
+        return slcPage == selectedPage ? Size.Medium : Size.Small;
+    }
+
+
+}

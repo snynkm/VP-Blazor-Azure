@@ -1,0 +1,120 @@
+﻿@inherits Menu
+
+@using DataAccess.Models.Menu;
+@using VpBlazorApp.Pages.CustomPages
+@using VpBlazorApp.Components
+
+<style>
+    .fontFamily{
+        font-family:        Garamond;
+    }
+
+    .mainStackContainer{
+        max-height:         120px;
+    }
+
+    .mainInfoContainer{
+        width:              75%;
+        max-height:         120px;
+        background-color:   floralwhite;
+    }
+
+    .mainImgContainer{
+        width:              25%;
+        max-height:         200px;
+        overflow:           hidden;
+    }
+
+    .subStackContainer{
+        position:           relative;
+        top:                0;
+        left:               0;
+    }
+
+    .subHeader{
+        background-color:   cornsilk;
+    }
+
+    .subBody{
+        height:             90%;
+        background-color:   transparent;
+    }
+
+    .subImg{
+        max-height:         100%;
+        min-width:          100%;
+        object-fit:         cover;
+    }
+
+    #cardName{
+        font-family:        'Times New Roman';
+        font-style:         italic;
+        font-weight:        bold;
+        font-size:          medium;
+        color:              firebrick;
+    }
+
+    #cardDescription {
+        font-size:          medium;
+        margin-left:        10%;
+        padding-top:        3%;
+        padding-bottom:     2%;
+        line-height:        110%;
+    }
+
+    .cardPrice{
+        font-family:        'Times New Roman';
+        font-style:         italic;
+        font-size:          small;
+        font-weight:        bold;
+
+    }
+</style>
+
+<MudStack Class="mainStackContainer rounded" Row="true" Spacing="0">
+
+    <MudPaper Class="mainInfoContainer">
+        <MudStack Class="subStackContainer" Spacing="0">
+
+            @*//Special Name *@
+            <MudPaper Class="subHeader" Elevation="0">
+                <MudCardHeader Class="p-1 inLine"><div id="cardName">@MItem?.SpecialName</div></MudCardHeader>
+            </MudPaper>
+
+            @*//Special Description & Prices *@
+            <MudPaper Class="subBody" Elevation="0"> 
+
+                @*AddItem Component*@
+                <AddItem MItem="@MItem"/>
+
+                <MudText><div id=cardDescription class="fontFamily">@MItem?.SpecialDescription</div></MudText>
+                <MudStack Row="true" >
+                    @if (MItem?.Prices != null)
+                    {
+                        @foreach (var price in MItem.Prices)
+                        {
+                            <MudText Class="cardPrice">$@price </MudText>
+                        }
+                    }
+                </MudStack>
+
+            </MudPaper>
+
+        </MudStack>
+    </MudPaper>
+
+    @*Images*@
+    <MudPaper Class="mainImgContainer rounded">
+        <MudImage Class="subImg rounded" Src="@MItem?.UrlExtension" />
+    </MudPaper>
+
+
+</MudStack>
+
+@code {
+
+    [Parameter]
+    public MenuItemDTO? MItem { get; set; }
+
+
+}

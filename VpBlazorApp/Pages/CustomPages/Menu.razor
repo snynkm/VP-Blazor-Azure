@@ -1,0 +1,145 @@
+﻿@page "/Pages/CustomPages/Menu"
+
+@using DataAccess
+@using DataAccess.Data
+@using DataAccess.Models
+@using DataAccess.DbAccess
+@using DataAccess.Models.Branch;
+@using DataAccess.Models.Menu;
+@using VpBlazorApp.Components
+
+@inherits ShoppingCart
+
+@inject IMenuData _menu
+
+<style>
+
+    .outerMainContainer{
+        width:              100vw;
+        height:             auto;
+        display:            grid;
+        place-items:        center;
+    }
+    .innerMainContainer{
+        background-color:   rgba(255,255,255,0.9);
+        max-width:          960px;
+        margin-top:         1%;
+        margin-bottom:      1%;
+    }
+    .headContainer{
+        width:              100vw;
+        min-width:          960px;
+        place-items:        center;
+        display:            grid;
+    }
+    .headContent {
+        background-color:   floralwhite;
+        color:              darkslategrey;
+        font-family:        'Times New Roman';
+        font-style:         italic;
+        font-size:          3em;
+        font-weight:        bold;
+        height:             auto;
+        min-width:          100%;
+        text-align:         center;
+        top:                50%;
+        overflow:           hidden;
+    }
+    .headImg{
+        max-height:         40px;
+    }
+    .headIcon {
+        color:              coral
+    }
+
+    .categoryName {
+        color:              darkslategray;
+        font-family:        'Times New Roman';
+        font-style:         italic;
+        font-size:          x-large;
+        font-weight:        bold;
+        text-transform:     capitalize;
+    }
+
+    .categoryDescription 
+    {
+        background-color:   floralwhite;
+        font-family:        'Times New Roman';
+        text-indent:        5%;
+    }
+
+    .noMargin{
+        margin:             0;
+    }
+
+    .menuItemTitle {
+        background-color:   floralwhite;
+        font-size:          x-large;
+    }
+</style>
+
+
+
+
+@if (MenuItems == null)
+{
+    <p><em>Loading... </em></p>
+}
+else
+{
+    <MudItem Class="headContainer">
+        <MudCard Class="headContent" Elevation="3">
+            @for (int i = 0; i < 2; i++) {<img src="images/wallpaper_pizza.png" class="headImg" />}
+            Full Menu
+            @for (int i = 0; i < 2; i++) {<img src="images/wallpaper_pizza.png" class="headImg"  />}
+        </MudCard>
+    </MudItem>
+
+    <MudItem Class="outerMainContainer">
+    @foreach (var category in MenuItemCategory.DistinctBy(x => x.CategoryId)) // 3x
+    {
+
+            <MudCard Class="innerMainContainer">
+                <MudGrid>
+
+                    <MudItem xs="12">
+
+                        <MudCardHeader Class="menuItemTitle d-flex oi-align-center oi-justify-center mud-width-full py-1">
+                            <MudIcon Class="headIcon" Icon="@Icons.Material.Filled.LocalFireDepartment"></MudIcon>
+                            <MudText Class="categoryName">@category.CategoryName Pizza</MudText>
+                            <MudIcon Class="headIcon" Icon="@Icons.Material.Filled.LocalFireDepartment"></MudIcon>
+                        </MudCardHeader>
+
+                        <MudText Class="categoryDescription">
+                            @category.CategoryDescription
+                        </MudText>
+
+                    </MudItem>
+
+                    @foreach (var menuItem in MenuItems.Distinct().Where(x => x.CategoryId == category.CategoryId)) //7x
+                    {
+                        <MudItem xs="12" sm="6" Style="max-height:150px; overflow:hidden" Class="rounded">
+                            <MenuOption MItem="menuItem"/>
+                        </MudItem>
+                    }
+
+                </MudGrid>
+            </MudCard>
+        
+    }
+    </MudItem>
+
+}
+
+
+@code {
+
+    private protected IEnumerable<MenuItemDTO>? MenuItems;
+    private protected IEnumerable<MenuItemDTO>? MenuItemCategory =>
+        MenuItems?.DistinctBy(x => x.CategoryId);
+
+    protected override async Task OnInitializedAsync() =>
+        MenuItems = await _menu.GetMenu();
+    
+
+}

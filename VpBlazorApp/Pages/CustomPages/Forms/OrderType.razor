@@ -1,0 +1,137 @@
+﻿@using DataAccess.Models.Branch;
+@using VpBlazorApp.Components;
+
+@inject IOrderData      _order
+@inject OrderState      _state
+
+<style>
+    .orderTypeMainContainer {
+        width:      350px;
+        max-width:  80%;
+        position:   absolute;
+        top:        50%;
+        left:       50%;
+        transform:  translate(-50%, -50%);
+        padding:    0;
+    }
+</style>
+
+    <MudCard Class="orderTypeMainContainer">
+            
+            <MudCardHeader>Confirm Delivery Type</MudCardHeader>
+            
+            <MudDivider/>
+
+             <MudForm Model="_state.OrderItem" @ref="form" @bind-IsValid="success">
+
+                 <MudRadioGroup 
+                    @bind-SelectedOption="@_state._isCarryout"
+                    T="bool?">
+                     <MudStack Row=true>
+                         
+                         <MudItem>
+                             <MudRadio 
+                                T="bool?"
+                                Option="true"
+                                @onclick="_state.SetCarryoutTrue">
+                                Carryout
+                             </MudRadio>
+                         </MudItem>
+
+                         <MudItem>
+                             <MudRadio 
+                                T="bool?"
+                                Option="false"
+                                @onclick="_state.SetCarryoutFalse">
+                                Delivery
+                             </MudRadio>
+                         </MudItem>
+
+                     </MudStack>
+                 </MudRadioGroup>
+
+                     @if(_state._isCarryout == true)
+                     {
+                         
+                         <MudCard>
+
+                             Select pickup location:
+
+                            <MudSelect 
+                                @bind-value="@_state.OrderItem.BranchId" 
+                                Label="Store Location"
+                                Required="_state._isCarryout == true"
+                                For="(() => _state.OrderItem.BranchId)" 
+                                RequiredError="Selection required for carryout"
+                                T="int" 
+                                Variant="Variant.Outlined">
+                                @if (Branches == null) { }
+                                else
+                                {
+                                    @foreach (var branch in Branches)
+                                    {
+                                        <MudSelectItem @bind-Value="branch.Id">@branch.City Branch</MudSelectItem>
+                                    }
+                                }
+                            </MudSelect>
+
+                         </MudCard>
+
+                     }
+
+                <MudButton OnClick="(() => PageChange(0))">
+                    Back
+                </MudButton>
+
+                <MudButton 
+                    Disabled="_state._isOrderTypeSelected == false"
+                    OnClick="GoNext">
+                    Continue to Info
+                </MudButton>
+
+             </MudForm>
+    </MudCard>
+
+@code {
+
+    [Parameter]
+    public int selectedPg { get; set; }
+
+    private protected IEnumerable<State>? States;
+    private protected IEnumerable<DataAccess.Models.Branch.Branch>? Branches;
+
+    MudForm form;
+    bool success;
+
+    [Parameter]
+    public EventCallback<int> SetSelectedPage { get; set; }
+
+    private async Task GoBack()
+    {
+        PageChange(0);
+        form.ResetValidation();
+    }
+    private async Task GoNext()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            PageChange(2);
+        }
+    }
+    private void PageChange(int pg)
+    {
+        SetSelectedPage.InvokeAsync(pg);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        States = await _order.GetStates();
+        Branches = await _order.GetBranches();
+        _state.OrderItem.BranchId = Branches.Select(x => x.Id).FirstOrDefault();
+
+    }
+    
+
+}
+
+

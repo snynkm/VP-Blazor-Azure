@@ -1,0 +1,457 @@
+﻿@using DataAccess.Data
+@using DataAccess.Models.Menu
+@using DataAccess.Models.Order
+@using DataAccess.Services
+
+@inherits ShoppingCart
+
+@inject IMenuData           _menu
+@inject ISnackbar           _snack
+@inject ICartItemService    _cart
+@inject NavigationManager   _nav
+@inject OrderState          _state
+
+<style>
+
+    .fontStyle{
+        font-family:    Garamond;
+        font-weight:    bold;
+    }
+
+    .fontSmall{
+        font-size:      small;
+    }
+
+    .fontLarge{
+        font-size:       large;
+    }
+
+    .topLine{
+        justify-content:center;
+        display:        flex;
+        align-items:    center
+    }
+
+    .toppingColumn{
+        max-height:     110px;
+        overflow-y:     scroll;
+        width:          100%;
+    }
+
+    .addToCart{
+        display:        block;
+        transform:      translate(0 ,20px);
+        min-width:      320px;
+        max-width:      320px;
+        padding:        2%;
+        min-height:     550px;
+        max-height:     550px;
+        z-index:        5;
+    }
+
+    .subtotalRow{
+        padding:         2%;
+    }
+
+    .imgContainer{
+        min-height:     190px;
+        max-height:     190px;
+
+        display:        flex;
+        justify-content:center;
+        align-items:    center;
+    }
+    .img{
+        max-width:      100%;
+    }
+
+    .topping{
+        font-style:     italic;
+        font-size:      x-small;
+        color:          lightgray;
+    }
+    .overflow{
+        overflow:       hidden;
+    }
+    .noPadding{
+        padding:        0;
+    }
+    .button{
+        width:          100%;
+        height:         100%
+    }
+    .button:hover{
+        color:          orangered
+    }
+</style>
+
+@*(+) Button*@
+<MudIconButton 
+    Icon="@Icons.Material.Filled.AddCircle" 
+    Style="float:left; text-align:initial; color: lightseagreen" 
+    Size="MudBlazor.Size.Large" 
+    OnClick="InitializeAddItem">
+</MudIconButton>
+
+
+
+@*Entire Overlay*@
+<MudOverlay 
+    DarkBackground="true"
+    @bind-Visible="_isVisible">
+            
+    <MudPaper Class="addToCart"
+        @onclick="() => _isVisible = true">
+            
+            @*Pizza Name*@
+            <MudItem xs="12" Class="topLine">
+
+                <MudText Class="fontStyle text-capitalize fontLarge">
+                    @if(MItem?.CategoryId == 3) 
+                    {
+                        @MItem?.CategoryName
+                    }
+                    else
+                    {
+                        @MItem?.SpecialName;
+                    }
+                </MudText>
+
+                <MudButton 
+                    Style="margin-left:auto;"
+                       OnClick="@ToggleAddItemOpen">
+                    <MudIcon Icon="@Icons.Material.Filled.Close"></MudIcon>
+                </MudButton>
+
+            </MudItem>
+            
+            @*Pizza Image*@
+            <div Class="imgContainer rounded overflow-hidden">
+                <MudImage Class="img" ObjectFit="ObjectFit.Contain" ObjectPosition="ObjectPosition.Top" Src="@MItem?.UrlExtension"></MudImage>
+            </div>
+
+            @*Section below image*@
+            <MudStack Row="true" Class="fontStyle" Spacing="0">
+                 
+                @*Sizes Column*@
+                <MudItem xs="4">
+
+                    Select Size:
+                <MudRadioGroup @bind-SelectedOption="@slcIdx" Style="padding-left:5%">
+                        <table>
+
+                            @foreach (var id in idxList)
+                            {
+                            //int i = 0;
+                            <tr>
+                                <MudRadio 
+                                    Option="@id"
+                                    Color="Color.Primary"
+                                    Dense="true"
+                                    Size="MudBlazor.Size.Small">
+
+                                        @*Will probably need fix*@
+                                        <MudText Class="fontSmall">@sizeNameList?[id] - $@priceList?[id] </MudText>
+
+                                </MudRadio>
+                                </tr>
+                            //i++;
+                            }
+                            </table>
+                    </MudRadioGroup>
+
+                </MudItem>
+
+                @*Toppings Column*@
+                <MudItem xs="8">
+
+                        Extra Toppings (max 2):
+                        <div class="toppingColumn">
+                        
+                            <table>
+                                @if(Toppings == null)
+                                {
+                            
+                                }
+                                else
+                                {
+                            
+                        
+                                @foreach (var topping in Toppings)
+                                        {
+                                            <tr>
+                                                <td style=" line-height: 20px;">
+                                        
+                                                    <MudButton 
+                                                        Style="padding:0%" 
+                                                        @bind-value="topping.PriceMod">
+
+                                                            <MudCheckBox 
+                                                                Dense="true" 
+                                                                @bind-Checked="@topping.IsChecked" 
+                                                                T="bool?" 
+                                                                Size="MudBlazor.Size.Small">
+
+                                                                    <MudText Class="fontSmall">(+$@topping.PriceMod) - @topping.Name</MudText>
+
+                                                            </MudCheckBox>
+
+                                                    </MudButton>
+
+                                                </td>
+                                            </tr>
+                                        }
+                                }
+                            </table>
+
+                        </div>
+
+                        <MudButton OnClick="ResetToppings">Reset Toppings</MudButton>
+
+                </MudItem>
+
+            </MudStack>
+            
+            @*Quantity*@
+            <MudNumericField  @bind-Value="Qty" Variant="Variant.Text" Label="Quantity" Min="1" Max="5" />
+            
+            @*Subtotal and AddToCart*@
+            <MudItem xs="12" Class="subtotalRow">
+
+                <MudStack Row="true">
+
+                    <MudItem xs="4">
+
+                        <MudText Class="fontStyle fontLarge">
+                            Subtotal: 
+                            @if(SubTotal == null) { }
+                            else
+                            {
+                                <MudText Typo="Typo.button" Class="fontStyle" Style="font-size:x-large">$@SubTotal</MudText>
+                            }
+                        </MudText>
+
+                    </MudItem>
+
+                    <MudItem xs="7">
+
+                        <MudButton 
+                            FullWidth
+                            OnClick="ValidateCart" 
+                            Class=" rounded-pill button" 
+                            Variant="Variant.Filled" 
+                            Color="Color.Primary" 
+                            Size="MudBlazor.Size.Large">Add To Cart
+                        </MudButton>
+
+                    </MudItem>
+
+                </MudStack>     
+            
+            </MudItem>
+    </MudPaper>
+
+</MudOverlay>
+
+
+                    @code {
+
+    [Parameter]
+    public MenuItemDTO MItem { get; set; }
+    private protected CartItemDTO? CartItem;
+    private protected static IEnumerable<ToppingDTO>? Toppings;
+
+    // 5, 12, 19, 26
+    public List<int> menuIdList =>          MItem.MenuItemIds.ToList();
+    // S, M, L, J
+    public List<string>? sizeNameList =>    MItem?.SizeNames?.ToList();
+    // 9.99, 13.99, 16.99, 18.99
+    public List<decimal>? priceList =>      MItem?.Prices?.ToList();
+    // 0, 1, 2, 3
+    public List<int>? idxList =>            Enumerable.Range(0, menuIdList.Count()).ToList();
+
+    // bind-value of SelectOption
+    public static int slcIdx;
+    public static int Qty = 1;
+    private static bool _isVisible = false;
+
+    // Checked Toppings
+    public static IEnumerable<ToppingDTO>? SelectedToppings => Toppings?.Where(x => x.IsChecked == true);
+
+    // Total Price Addition for Checked Toppings
+    public static decimal? TPriceMod => SelectedToppings?.Sum(x => x.PriceMod);
+
+    // Price of Selected Size
+    //public decimal? MPrice => priceList?.ElementAtOrDefault(MId.GetValueOrDefault());
+    public decimal? MPrice => priceList?[slcIdx];
+
+    public int? MId => menuIdList[slcIdx];
+    public string? szName => sizeNameList?[slcIdx];
+
+
+    // Total Price of MenuItem
+    public decimal? SubTotal => (MPrice + TPriceMod) * Convert.ToDecimal(Qty);
+    // (9.99 + 0.99)
+
+    /* Executes when (+) Button clicked */
+    public async Task InitializeAddItem()
+    {
+        Toppings = await _menu.GetToppingsDTO();
+        await ToggleAddItemOpen();
+        slcIdx = idxList.FirstOrDefault();
+
+        _nav.LocationChanged += HandleLocationChanged;
+    }
+    private void HandleLocationChanged (object sender, LocationChangedEventArgs e)
+    {
+        _isVisible = false;
+        StateHasChanged();
+    }
+
+    /* Clears Topping Checkboxes */
+    public async Task ResetToppings()
+    {
+        foreach (var topping in Toppings) 
+        {
+            topping.IsChecked = false;
+        }
+    }
+
+    /* Executes when (AddToCart) Button clicked */
+    public async Task ValidateCart()
+    {
+
+        if (SelectedToppings?.Count() <= 2)
+        {
+            if (_state._isCartEmpty == true)
+            {
+                await AddItemToCart();
+                await ToggleAddItemOpen();
+                StateHasChanged();
+                await _state.SetCartFull();
+            }
+            else
+            {
+                await CheckExistingCartItem();
+                await ToggleAddItemOpen();
+                StateHasChanged();
+            }
+        }
+        else
+        {
+            _snack.Add("Item can have up to 2 toppings. Please update selection.");
+        }
+    }
+
+    public async Task AddItemToCart()
+    {
+        CartItem = await _cart.AddCartItem(MId, (_state.CartItems?.Count() + 1), MItem, szName, Qty, MPrice, SelectedToppings?.ToList());
+        _state.CartItems?.Add(CartItem);
+        await _state.SetCartFull();
+        _snack.Add("Item added to cart.");
+    }
+
+    public async Task UpdateItemInCart(int? olId)
+    {
+        _state.CartItems.FirstOrDefault(x => x.OrderLineId == olId).Quantity += Qty;
+        _snack.Add("Cart quantity updated.");
+    }
+
+    public async Task CheckExistingCartItem()
+    {
+        // How do we get the MenuItemId from the current setup 
+        //var selectedItem = await _menu.GetSpecificMenuItem(MItem.CategoryId, SzId, MItem.SpecialId);
+
+        if (SelectedToppings?.Count() == 0)
+        {
+            CartItemDTO result;
+            try
+            {
+                result = _state.CartItems?.First(x => x?.MenuItemId == MId && x?.Toppings?.Count() == SelectedToppings?.Count());
+            }
+            catch
+            {
+                await Task.FromResult<CartItemDTO>(result = null);
+            }
+
+            if (result == null)
+            {
+                if (_state.CartItems.Count() <= 4)
+                {
+                    await AddItemToCart();
+                    StateHasChanged();
+                }
+                else
+                {
+                    _snack.Add("Max 5 items per order.");
+                }
+            }
+            else
+            {
+                if (result.Quantity + Qty <=5)
+                {
+                    await UpdateItemInCart(result.OrderLineId);
+                }
+                else
+                {
+                    _snack.Add("Max 5 per unique item.");
+                }
+            }
+        }
+        else
+        {
+            CartItemDTO result;
+            try
+            {
+                result = _state.CartItems.First(x => x.MenuItemId == MId
+                        && x.Toppings?.Sum(x => x.Id) == SelectedToppings?.ToList().Sum(x => x.Id)
+                        && x.Toppings?.Min(x => x.Id) == SelectedToppings?.Min(x => x.Id));
+            }
+            catch
+            {
+                await Task.FromResult<CartItemDTO>(result = null);
+            }
+
+            if (result == null)
+            {
+                if (_state.CartItems.Count() <= 4)
+                {
+                    await AddItemToCart();
+                    StateHasChanged();
+                }
+                else
+                {
+                    _snack.Add("Max 5 items per order.");
+                }
+            }
+            else
+            {
+                if (result.Quantity + Qty <= 5)
+                {
+                    await UpdateItemInCart(result.OrderLineId);
+                    StateHasChanged();
+                }
+                else
+                {
+                    _snack.Add("Max 5 per unique item.");
+                }
+            }
+        }
+    }
+
+    public async Task ToggleAddItemOpen()
+    {
+        if (_isVisible == false)
+        {
+            _isVisible = true;
+        }
+        else
+        {
+            _isVisible = false;
+            await ResetToppings();
+        }
+        
+    }
+
+
+}

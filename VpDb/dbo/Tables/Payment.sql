@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Payment]
+(
+	[Id] SMALLINT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] VARCHAR(10) NULL
+)
