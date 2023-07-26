@@ -1,5 +1,0 @@
-﻿CREATE TABLE [dbo].[State]
-(
-	[Id] SMALLINT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] CHAR(2) NOT NULL
-)

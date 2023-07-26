@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Topping]
-(
-	[Id] SMALLINT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] VARCHAR(20) NULL, 
-    [PriceMod] DECIMAL(5, 2) NULL, 
-)

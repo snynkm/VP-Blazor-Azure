@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[Size]
-(
-	[Id] SMALLINT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] CHAR NULL, 
-    [PriceMod] DECIMAL(5, 2) NULL
-	
-)

@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Url]
-(
-	[Id] SMALLINT NOT NULL PRIMARY KEY IDENTITY, 
-    [UrlExtension] VARCHAR(255) NULL, 
-    [Description] VARCHAR(255) NULL
-)
