@@ -78,11 +78,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      - name: Sample Azure action
-        with: # Set Azure credentials secret as an input
-          credentials: VP_WEBAPP_PUBLISH_PROFILE
-        env: # Or as an environment variable
-          credentials: VP_WEBAPP_PUBLISH_PROFILE
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
