@@ -85,4 +85,4 @@ jobs:
         with:
           app-name: VennatosPizza
           publish-profile: ${{ secrets.VP_WEBAPP_PUBLISH_PROFILE }}
-          package: VpBlazorApp
+          package: '.'
