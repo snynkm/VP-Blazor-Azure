@@ -388,7 +388,7 @@
         await _data.InsertMenuItemOrderTopping(menuItemOrderTopping); // MenuItemOrderTopping Table Insert w/ Key
         */
         _submitButtonDisabled = true;
-
+        _state._IsOrderSuccess = true;
         _nav.NavigateTo("/Pages/CustomPages/Forms/OrderConfirmation");
     }
 
