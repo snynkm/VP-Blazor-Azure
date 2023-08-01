@@ -58,39 +58,6 @@
    </MudCard>
 </MudCard>
 
-@*
-@if (BranchesDTO == null)
-{
-     <p> Loading... </p>
-}
-else
-{
-    <MudCard>
-        <MudCardHeader>Locations:</MudCardHeader>
-        <MudText>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Phone Number</th>
-                </tr>
-                @foreach (var branch in BranchesDTO)
-                {
-                    <tr>
-                        <td>@branch.City Branch</td>
-                        <td>@branch.AddressLine</td>
-                        <td>@branch.City</td>
-                        <td>@branch.StateName</td>
-                        <td>@FormatPhone(branch.Phone)</td>
-                    </tr>
-                }
-            </table>
-        </MudText>
-    </MudCard>
-}*@
-
 @code {
     private protected IEnumerable<BranchDTO>? BranchesDTO;
 

@@ -9,7 +9,9 @@ public class OrderState
     public Order? OrderItem { get; set; }
     public Customer? Customer { get; set; }
 
+    public bool _InitialiNotice { get; set; } = true;
     public bool _IsOrderSuccess { get; set; } = false;
+
 
     public decimal? CartSubtotal =>
         CartItems?.Sum(x => (x.Price + x.Toppings?.Sum(x => x.PriceMod)) * x.Quantity);

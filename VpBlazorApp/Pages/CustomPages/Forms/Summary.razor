@@ -375,9 +375,9 @@
     {
 
 
-
+        /*
         // * DISABLED FOR DEMO PURPOSES//
-        // * 
+        // *
         var customer = await _service.ConvertToGuest(_state.Customer);
         var customerId = await _data.InsertGuestReturnKey(customer); // Guest Table Insert w/ Key
         var order = await _service.BuildOrder(_state, customerId);
@@ -386,11 +386,10 @@
         await _data.InsertMenuItemOrder(menuItemOrder); // MenuItemOrder Table Insert w/ Key
         var menuItemOrderTopping = await _service.BuildMenuItemOrderTopping(_state.CartItems, orderId);
         await _data.InsertMenuItemOrderTopping(menuItemOrderTopping); // MenuItemOrderTopping Table Insert w/ Key
-
+        */
         _submitButtonDisabled = true;
-        await _state.SetOrderSuccessTrue();
-        ToggleOverlay(true);
 
+        _nav.NavigateTo("/Pages/CustomPages/Forms/OrderConfirmation");
     }
 
 }

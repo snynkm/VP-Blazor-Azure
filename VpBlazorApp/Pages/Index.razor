@@ -4,6 +4,7 @@
 @using DataAccess.Resources;
 @using VpBlazorApp.Components;
 
+@inject OrderState          _state
 @inject NavigationManager   _nav
 
 <style>
@@ -101,6 +102,12 @@
         text-align:         center; 
         
     }
+
+    .notice {
+        max-height: min(400px, 40vh);
+        max-width: min(500px,45vw);
+        padding: 5%;
+    }
 </style>
 
 <MudGrid Class="indexMainContainer" Spacing="0">
@@ -170,6 +177,28 @@
     </MudItem>
 
 </MudGrid>
+
+<MudOverlay DarkBackground="true" AutoClose="true" @bind-Visible="_state._InitialiNotice" @onclick="(() => _state._InitialiNotice = false)">
+    <MudCard Class="notice">
+        <MudCardHeader Style="font-weight:bold; align-self:center; justify-content:center; font-size:larger">
+            Notice
+        </MudCardHeader>
+        <MudText Style="text-align:center">
+            This website is designed to be for demo purposes. Please navigate to 'Legal' page for more information.
+
+        </MudText>
+        <br />
+        <MudText Style="text-align:center">
+            This demo also uses serverless database on Azure to reduce costs.
+            If you happen to visit this website during inactive period, please way a few moments for the database to refresh.
+            Thanks!
+        </MudText>
+        <br />
+        <MudButton @onclick="(() => _state._InitialiNotice = false)">
+            Close
+        </MudButton>
+    </MudCard>
+</MudOverlay>
 
 @code {
 
