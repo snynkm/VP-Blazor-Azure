@@ -4,16 +4,22 @@
 
 Application Name: Vennato's Pizza
 
-<h3>Table of Contents:</h3>
+<h2>Table of Contents:</h2>
 <ul>
-  <li>List Item 1</li>
-  <li>List Item 2</li>
-  <li>List Item 3</li>
+  <li>Summary</li>
+  <li>Background</li>
+  <li>Features</li>
+  <li>Steps</li>
+  <li>Eureka Moments</li>
+  <li>Missed Opportunities</li>
+  <li>Helpful Resources</li>
+  <li>Image Reference Sheet</li>
 </ul>
 
-<h3>Summary:</h3>
-This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. 
+<h2>Summary:</h2>
+<p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. </p>
 
+<p>Below are some of the main technologies used to develop the application:</p>
 <table>
   <tr>
     <th><b>Technologies:</b></th>
@@ -40,54 +46,54 @@ This is my first full-stack application project which is a demo Pizza Ordering A
         <li><b>Logo Generator:</b> <a href="https://cooltext.com/">Cooltext</a> </li>
       </ul>  
     </td>
-  </tr>
-  <tr>
-    <th><b></b></th>
-    <td></td>
-  </tr>
 </table>
 
 
 
-<h3>Background:</h3>
+<h2>Background:</h2>
 
 <p>
-  Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea because of a couple reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure to include certain features and enhancements that really draw out a smooth user experience (hopefully). 
+  Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea because of a couple reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure it includes certain features and enhancements that really draw out a smooth user experience (hopefully). 
 </p>
 
 <p>
   To sum it up, the project was definitely a grind but also something I found to be very rewarding. In terms of technicality, the project itself is nowhere near perfect. There were several things I felt could have been improved upon but due to time constraints wasn't able to restructure. That being said, I still learned a lot and had tons of fun developing it. To name a few, my favorite parts while developing this application were coming up with the product names, figuring out the pricing, coming up with architectural UX/UI designs, and implementing creative solutions to find workarounds.
 </p>
 
-<h3>Features:</h3>
+<h2>Features:</h2>
 <ul>
-<li>Product Catalog</li>
-<li>Shopping Cart</li>
-<li>Checkout Process/Order Submission</li>
-<li>Business Analysis</li>
+<li>
+  <h3>Product Catalog</h3>
+</li>
+<li>
+  <h3>Shopping Cart</h3>
+</li>
+<li>
+  <h3>Checkout Process/Order Submission</h3>
+</li>
+<li>
+  <h3>Business Analysis/Reporting</h3>
+  <p>
+        Here are the menu items we are adding to the order:
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f74a0136-c3de-4e13-9843-91b6a885b5bf" alt="Menu" width="800">
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/c6af9f3d-b916-4da6-ade8-126eab628371" alt="AddItem" width="400">
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400">
+    Viewing the normalized data after order submission:
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="800">
+    What items were included in this order?
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/7c530dff-650f-403c-9342-5c82cc27ac24" alt="MenuItem Lookup" width="500">
+    What toppings were included with each item?
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/383e8234-2a0a-43ff-b79b-6a1613a05ad2" alt="Full MenuItem Lookup" width="500">
+    With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as (1) What's the most popular item of X month? (2) Which states had more carryout orders vs delivery? (3) What was the average item count per order?
+  </p>
+</li>
 </ul>
 
-Here are the menu items we are adding to the order:
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f74a0136-c3de-4e13-9843-91b6a885b5bf" alt="Menu" width="800">
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/c6af9f3d-b916-4da6-ade8-126eab628371" alt="AddItem" width="400">
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400">
-
-Viewing the normalized data after order submission:
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="800">
-
-What items were included in this order?
 
 
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/7c530dff-650f-403c-9342-5c82cc27ac24" alt="MenuItem Lookup" width="500">
+<h2>Steps:</h2>
 
-What toppings were included with each item?
-<img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/383e8234-2a0a-43ff-b79b-6a1613a05ad2" alt="Full MenuItem Lookup" width="500">
-
-With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as (1) What's the most popular item of X month? (2) Which states had more carryout orders vs delivery? (3) What was the average item count per order?
-
-<h3>Steps:</h3>
-
-<h3>Eureka Moments:</h3>
+<h2>Eureka Moments:</h2>
 <ul>
   <li>
     <b>Understanding Component Life Cycles</b>
@@ -96,7 +102,7 @@ With this database structure, and the ability to link these tables, from there y
   <li>
     <b>Learning about Shared State</b>
     <p>
-      At this point of the project, I had already configured both the Product Catalog and the ShoppingCart component, and was now ready to start with the checkout flow. I hit a major road block and wasn't sure how to proceed with a dynamic checkout flow that was contingent on multiple pieces of data spread across various components. Luckily around the same time, I started to use chat GPT for the project and was able to ask it questions on how to proceed. It basically gave me two options, I could use EventCallback with each component or use a Shared State class. I ended up going with the Shared State because it made more sense to do so. Plus, I had used EventCallbacks in two of my components previously and wasn't really a fan of how much code was required to communicate a single piece of data between two components. Implementing a Shared State was crucial to my application and it allowed me to better understand how data can be changed and shared across different components. The only caveat to using Shared State is that it requires a lot of overhead so it's important distinquish what items absolutely need to be in the Shared State.
+      At this point of the project, I had already configured both the Product Catalog and the ShoppingCart component, and was now ready to start with the checkout flow. I hit a major road block and wasn't sure how to proceed with a dynamic checkout flow that was contingent on multiple pieces of data, spread across various components. Luckily around the same time, I started to use chat GPT for the project and was able to ask it questions on how to proceed. It basically gave me two options, I could use EventCallback with each component or use a Shared State class. I ended up going with the Shared State because it made more sense to do so. Plus, I had used EventCallbacks in two of my components previously and wasn't really a fan of how much code was required to communicate a single piece of data between two components. Implementing a Shared State was crucial to my application and it allowed me to better understand how data can be changed and shared across different components. The only caveat to using Shared State is that it requires a lot of overhead so it's important distinquish what items absolutely need to be in the Shared State.
     </p>
   </li>
   <li>
@@ -120,8 +126,19 @@ With this database structure, and the ability to link these tables, from there y
   </li>
 </ul>
 
-<h3>Helpful Resources:</h3>
+<h2>Missed Opportunities:</h2>
+There were many features I wanted to include on the application that simply fell out of scope due to time constraints: 
+<p><ul>
+  <li><b>Payment Transaction Service</b> - I would have liked to add some sort of payment processing microservice in with the application. But after researching, it seems that implementing a transaction service would open up a whole 'nother can of worms. At larger companies, these payment processes need to be audited in some fashion which would require detailed security configurations. I think I could figure out how to implement this but it would require a lot of bandwidth and time.  </li>
+  <li><b>Email Notification Service</b> - Another service that fell out of scope due to time. Although I did do research and found that I could probably add the service using Azure Functions and an email service such as Amazon SES or SendGrid. This might be something I can include on a future project.</li>
+  <li><b>Log In Service</b> - Like the payment transaction service, it seems like this would have required some additional microservice with detailed security enhancements. I wasn't able to produce this but at the very least, I did configure the application in a way that I felt can easily scale if deciding to add this in later. I'm not sure if this is orthodox practice, but I ended up duplicating the Customer table (now a Parent Model/no table) into the User and Guest tables (inherited Models/populated tables) with the ability to join either table on the Order table using a common attribute (CustomerType - CHAR, which is technically not a FK but serves similar functionality). That way, if I wanted to add a login service, the system could do a SELECT on just the User table. It wouldn't have to filter through all the guest information and only check returning customers' from the User table.</li>
+</ul>
+</p>
 
+<h2>Helpful Resources:</h2>
+<p>As mentioned earlier, Tim Corey's Youtube channel helped me tremendously with a lot of the initial configurations for the project. I also visited various other channels on Youtube to help me understand broader topics. My [snynkm] page Self-Education section elaborates more on the resources I've used to help me get started as a .NET developer.</p>
+
+<h2>Image Reference Sheet:</h2>
 
 
 
