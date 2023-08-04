@@ -67,21 +67,26 @@ Application Name: Vennato's Pizza
 </li>
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="330">
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="330">
+  <p>- Displays full menu and all menu item details.
+  <p>- Includes AddItem component for item selection. Includes dynamic two-way binded fields that immediately updates values.
 <li>
   <h3>Shopping Cart</h3>
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="330">
+  <p>- Allows quantity update and item removal and displays dynamic subtotal.
 </li>
 <li>
-  <h3>Checkout Process/Order Submission</h3>
-    <p>Data Validations</p>
+  <h3>Dynamic Checkout Process & Order Submission</h3>
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/9e21799e-285a-421a-be26-3dd28991f63b" alt="Checkout" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/046cdf90-a914-41ac-90b8-97bf27fb8ba2" alt="Data Validations" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/6c042ed4-a274-4c4b-b354-419e9b766220" alt="Checkout Flow Indicator" height="300">
+    <p>- Includes dynamic checkout flow that prefills info submitted before checkout.
+    <p>- Runs client-side data validations to check for incorrect inputs.
+    <p>- Includes a timeline that indicates checkout process step.
 </li>
 <li>
   <h3>Business Analysis/Reporting</h3>
       <p>
-        This feature is designed for back-end use. At the start of the project, I made sure the transactional data was normalized (as best I could). All data in the database that involves customers and orders would be easy to scale and maintain. This also means that after data insertion, business analytics can go in and query against the database to gather business insight.
+       - This feature is designed for back-end use. At the start of the project, I made sure the transactional data was normalized (as best I could). All data in the database that involves customers and orders would be easy to scale and maintain. This also means that after data insertion, business analytics can go in and query against the database to gather business insight.
       <p>
         Below is an example of how order data is stored:
       </p>  
@@ -96,28 +101,29 @@ Application Name: Vennato's Pizza
       <p>
         2. Order data is inserted into respective tables:
       </p>
-      <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="800">
+      <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="600">
       <p>
-        3. Full Item Linkage (if needed):
+        3. Map catalog info from Orders:
       </p>
-        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/d423652f-8b6e-4c1d-8673-811bdb6fb232" alt="Full MenuItem Lookup" width="400">
+        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/855395e0-3f37-48ec-bf01-c66414d3cfab" alt="Full MenuItem Lookup" width="500">
       <p>
-        With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as 
-      </p>
-      <p>
-        
-      </p>  
-      <p>
-        (1) What's the most popular item of X month? 
+        With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as: 
       </p>
       <p>
-        (2) Which states had more carryout orders vs delivery? 
+        (1) Most popular item during X-month? 
       </p>
       <p>
-        (3) What was the average item count per order?
+        (2) States with more carryout vs delivery during X-month(s)? 
       </p>
-      
-      
+      <p>
+        (3) Average item count per order during X-months(s)?
+      </p>
+      <p>
+        Check out the full diagram on how I linked the tables:
+      </p>
+      <p>
+        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f99a3934-79ba-41b0-9a9a-65ea16664860" alt="Diagram" width="800">
+      </p>
     </div>
 </li>
 </ol>
@@ -159,13 +165,14 @@ Application Name: Vennato's Pizza
 There were many features I wanted to include on the application that simply fell out of scope due to time constraints: 
 <p><ul>
   <li><b>Payment Transaction Service</b> - I would have liked to add some sort of payment processing microservice in with the application. But after researching, it seems that implementing a transaction service would open up a whole 'nother can of worms. At larger companies, these payment processes need to be audited in some fashion which would require detailed security configurations. I think I could figure out how to implement this but it would require a lot of bandwidth and time.  </li>
-  <li><b>Email Notification Service</b> - Another service that fell out of scope due to time. Although I did do research and found that I could probably add the service using Azure Functions and an email service such as Amazon SES or SendGrid. This might be something I can include on a future project.</li>
+  <li><b>Email Notification Service</b> - Another service that fell out of scope due to time. Although, I did do research and found that I could probably add the service using Azure Functions and an email service such as Amazon SES or SendGrid. This might be something I can include on a future project.</li>
   <li><b>Log In Service</b> - Like the payment transaction service, it seems like this would have required some additional microservice with detailed security enhancements. I wasn't able to produce this but at the very least, I did configure the application in a way that I felt can easily scale if deciding to add this in later. I'm not sure if this is orthodox practice, but I ended up duplicating the Customer table (now a Parent Model/no table) into the User and Guest tables (inherited Models/populated tables) with the ability to join either table on the Order table using a common attribute (CustomerType - CHAR, which is technically not a FK but serves similar functionality). That way, if I wanted to add a login service, the system could do a SELECT on just the User table. It wouldn't have to filter through all the guest information and only check returning customers' from the User table.</li>
 </ul>
 </p>
 
+
 <h2>Helpful Resources:</h2>
-<p>As mentioned earlier, Tim Corey's Youtube channel helped me tremendously with a lot of the initial configurations for the project. I also visited various other channels on Youtube to help me understand broader topics. My [snynkm] page Self-Education section elaborates more on the resources I've used to help me get started as a .NET developer.</p>
+<p>Tim Corey's Youtube channel helped me tremendously with a lot of the initial configurations for the project. I also visited various other channels on Youtube to help me understand broader topics. My [snynkm] page Self-Education section elaborates more on the resources I've used to help me get started as a .NET developer.</p>
 
 <h2>Image Reference Sheet:</h2>
 
