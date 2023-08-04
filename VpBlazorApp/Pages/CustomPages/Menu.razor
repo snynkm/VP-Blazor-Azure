@@ -138,8 +138,32 @@ else
     private protected IEnumerable<MenuItemDTO>? MenuItemCategory =>
         MenuItems?.DistinctBy(x => x.CategoryId);
 
-    protected override async Task OnInitializedAsync() =>
+    protected override async Task OnInitializedAsync()
+    {
         MenuItems = await _menu.GetMenu();
-    
+        await AssignTags();
+    }
+
+    private async Task AssignTags()
+    {
+        string imgName = "images/";
+        string imgExt = ".png";
+
+        if (MenuItems == null){ }
+        else
+        {
+            foreach (var item in MenuItems)
+            {
+                if (item.CategoryId == 3)
+                {
+                    item.ImageTag = imgName + "0" + imgExt;
+                }
+                else
+                {
+                    item.ImageTag = imgName + item.SpecialId + imgExt;
+                }
+            }
+        }
+    }
 
 }

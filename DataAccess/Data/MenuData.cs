@@ -19,7 +19,7 @@ public class MenuData : IMenuData
     {
         var menuItems = new List<MenuItemDTO>();
 
-        var result = await _db.LoadData<MenuItemDTO, dynamic>("dbo.spGetCategorySizeSpecialUrl", new { });
+        var result = await _db.LoadData<MenuItemDTO, dynamic>("dbo.spGetCategorySizeSpecial", new { });
 
         foreach (var item in result.Where(x => x.CategoryId == 1)) // slices
         {

@@ -19,7 +19,7 @@ public class CartItemService : ICartItemService
 
     public Task<CartItemDTO> AddCartItem(int? mId, int? olid, MenuItemDTO mItem, string szName, int qty, decimal? price, List<ToppingDTO> tps)
     {
-        CartItemDTO cartItem = new(mId, olid, mItem.CategoryName, szName, mItem.SpecialName, qty, price, mItem.UrlExtension, tps); 
+        CartItemDTO cartItem = new(mId, olid, mItem.CategoryName, szName, mItem.SpecialName, qty, price, mItem?.ImageTag, tps); 
 
         return Task.FromResult(cartItem);
     }

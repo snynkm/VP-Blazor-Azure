@@ -38,19 +38,14 @@ public class MenuItemDTO
     [Column("SpecialDescription")]
     public string? SpecialDescription { get; set; }
 
-
+    [Column("ImageTage")]
+    public string? ImageTag { get; set; }
 
     [Column("Prices")]
     public IEnumerable<decimal>? Prices { get; set; }
 
     [Column("Price")]
     public decimal? Price { get; set; }
-
-    [Column("UrlId")]
-    public int UrlId { get; set; }
-
-    [Column("UrlExtension")]
-    public string? UrlExtension { get; set; }
 
 }
 

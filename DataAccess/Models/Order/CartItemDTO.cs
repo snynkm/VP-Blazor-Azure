@@ -13,13 +13,13 @@ public class CartItemDTO
     public decimal? Price { get; set; }
     public List<Topping>? Toppings { get; set; }
 
-    public string? UrlExtension { get; set; }
+    public string? ImgTag { get; set; }
 
     public CartItemDTO()
     {
         
     }
-    public CartItemDTO(int? mId, int? olid, string cName, string szName, string spName, int qty, decimal? price, string url, List<ToppingDTO> tps)
+    public CartItemDTO(int? mId, int? olid, string cName, string szName, string spName, int qty, decimal? price, string imgTag, List<ToppingDTO> tps)
     {
         MenuItemId = mId;
         OrderLineId = olid;
@@ -29,7 +29,7 @@ public class CartItemDTO
         Quantity = qty;
         Price = price;
         Toppings = new();
-        UrlExtension = url;
+        ImgTag = imgTag;
 
         foreach (var tp in tps)
         {

@@ -61,7 +61,6 @@ public class SqlAccess : ISqlAccess
         output.SpecialId = input.SpecialId;
         output.SpecialName = input.SpecialName;
         output.SpecialDescription = input.SpecialDescription;
-        output.UrlExtension = input.UrlExtension;
         return Task.FromResult(output);
 
     }
