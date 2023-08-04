@@ -1,6 +1,6 @@
 # Pizza Ordering Application (Demo)
 
-<h3>Demo Link: <a href="https://vennatospizza.azurewebsites.net/">Visit My Project Demo at Vennato's Pizza Website</a> </h3>
+<h3>Demo Link: 🔥🍕<a href="https://vennatospizza.azurewebsites.net/">Visit My Project Demo at Vennato's Pizza Website</a>🍕🔥 </h3>
 
 Application Name: Vennato's Pizza
 
@@ -8,21 +8,21 @@ Application Name: Vennato's Pizza
 <ul>
   <li>Summary</li>
   <li>Background</li>
+  <li>Technologies</li>
   <li>Features</li>
-  <li>Steps</li>
   <li>Eureka Moments</li>
   <li>Missed Opportunities</li>
   <li>Helpful Resources</li>
   <li>Image Reference Sheet</li>
 </ul>
 
-<h2>Summary:</h2>
-<p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. </p>
+<h2> Summary:</h2>
+<p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions. </p>
 
 <p>Below are some of the main technologies used to develop the application:</p>
 <table>
   <tr>
-    <th><b>Technologies:</b></th>
+    <th><b>  Technologies:</b></th>
     <td>
         <ul>
         <li><b>Front-End:</b> HTML | CSS | MudBlazor</li>
@@ -50,50 +50,79 @@ Application Name: Vennato's Pizza
 
 
 
-<h2>Background:</h2>
+<h2> Background:</h2>
 
 <p>
   Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea because of a couple reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure it includes certain features and enhancements that really draw out a smooth user experience (hopefully). 
 </p>
 
 <p>
-  To sum it up, the project was definitely a grind but also something I found to be very rewarding. In terms of technicality, the project itself is nowhere near perfect. There were several things I felt could have been improved upon but due to time constraints wasn't able to restructure. That being said, I still learned a lot and had tons of fun developing it. To name a few, my favorite parts while developing this application were coming up with the product names, figuring out the pricing, coming up with architectural UX/UI designs, and implementing creative solutions to find workarounds.
+  In summary, the project was definitely a grind but also something I found to be very rewarding. In terms of technicality, the project itself is nowhere near perfect. There were several things I felt could have been improved upon but due to time constraints wasn't able to restructure. That being said, I still learned a lot and had tons of fun developing it. To name a few, my favorite parts were coming up with the products and pricing, designing the UX/UI, and implementing creative solutions to work around issues.
 </p>
 
 <h2>Features:</h2>
-<ul>
+<ol>
 <li>
   <h3>Product Catalog</h3>
 </li>
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="330">
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="330">
 <li>
   <h3>Shopping Cart</h3>
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="330">
 </li>
 <li>
   <h3>Checkout Process/Order Submission</h3>
+    <p>Data Validations</p>
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/9e21799e-285a-421a-be26-3dd28991f63b" alt="Checkout" height="300">
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/046cdf90-a914-41ac-90b8-97bf27fb8ba2" alt="Data Validations" height="300">
+    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/6c042ed4-a274-4c4b-b354-419e9b766220" alt="Checkout Flow Indicator" height="300">
 </li>
 <li>
   <h3>Business Analysis/Reporting</h3>
-  <p>
-        Here are the menu items we are adding to the order:
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f74a0136-c3de-4e13-9843-91b6a885b5bf" alt="Menu" width="800">
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/c6af9f3d-b916-4da6-ade8-126eab628371" alt="AddItem" width="400">
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400">
-    Viewing the normalized data after order submission:
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="800">
-    What items were included in this order?
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/7c530dff-650f-403c-9342-5c82cc27ac24" alt="MenuItem Lookup" width="500">
-    What toppings were included with each item?
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/383e8234-2a0a-43ff-b79b-6a1613a05ad2" alt="Full MenuItem Lookup" width="500">
-    With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as (1) What's the most popular item of X month? (2) Which states had more carryout orders vs delivery? (3) What was the average item count per order?
-  </p>
+      <p>
+        This feature is designed for back-end use. At the start of the project, I made sure the transactional data was normalized (as best I could). All data in the database that involves customers and orders would be easy to scale and maintain. This also means that after data insertion, business analytics can go in and query against the database to gather business insight.
+      <p>
+        Below is an example of how order data is stored:
+      </p>  
+      </p>
+        <div style="max-width: 800px; margin:0 auto;">
+      <p>
+        1. Items are added from the menu and order created:
+      </p>
+      <p>
+        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400">
+      </p>
+      <p>
+        2. Order data is inserted into respective tables:
+      </p>
+      <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="800">
+      <p>
+        3. Full Item Linkage (if needed):
+      </p>
+        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/d423652f-8b6e-4c1d-8673-811bdb6fb232" alt="Full MenuItem Lookup" width="400">
+      <p>
+        With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as 
+      </p>
+      <p>
+        
+      </p>  
+      <p>
+        (1) What's the most popular item of X month? 
+      </p>
+      <p>
+        (2) Which states had more carryout orders vs delivery? 
+      </p>
+      <p>
+        (3) What was the average item count per order?
+      </p>
+      
+      
+    </div>
 </li>
-</ul>
+</ol>
 
-
-
-<h2>Steps:</h2>
-
-<h2>Eureka Moments:</h2>
+<h2> Eureka Moments:</h2> 
 <ul>
   <li>
     <b>Understanding Component Life Cycles</b>
