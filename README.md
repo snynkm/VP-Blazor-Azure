@@ -8,7 +8,7 @@ Application Name: Vennato's Pizza
 <ul>
   <li>Summary</li>
   <li>Background</li>
-  <li>Technologies</li>
+  <li>Technology</li>
   <li>Features</li>
   <li>Eureka Moments</li>
   <li>Missed Opportunities</li>
@@ -19,7 +19,8 @@ Application Name: Vennato's Pizza
 <h2> Summary:</h2>
 <p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions. </p>
 
-<p>Below are some of the main technologies used to develop the application:</p>
+<h2> Technology:</h2>
+<p>Below are main technologies used for development:</p>
 <table>
   <tr>
     <th><b>  Technologies:</b></th>
@@ -53,7 +54,7 @@ Application Name: Vennato's Pizza
 <h2> Background:</h2>
 
 <p>
-  Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea because of a couple reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure it includes certain features and enhancements that really draw out a smooth user experience (hopefully). 
+  Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea for of a couple of reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure it includes certain features and enhancements that really draw out a smooth user experience (hopefully). 
 </p>
 
 <p>
@@ -67,7 +68,7 @@ Application Name: Vennato's Pizza
 </li>
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="300">
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="300">
-  <p>- Displays full menu and all item details.
+  <p style="text-align: center;">- Displays full menu and all item details.
   <p>- Includes AddItem component for item selection. Includes dynamic two-way binded fields that immediately updates values.
 <li>
   <h3>Shopping Cart</h3>
@@ -91,40 +92,21 @@ Application Name: Vennato's Pizza
         Below is an example of how order data is stored:
       </p>  
       </p>
-        <div style="max-width: 800px; margin:0 auto;">
-      <p>
-        1. Items are added from the menu and order created:
-      </p>
-      <p>
-        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400">
-      </p>
-      <p>
-        2. Order data is inserted into respective tables:
-      </p>
-      <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="600">
-      <p>
-        3. Map catalog info from Orders:
-      </p>
-        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/855395e0-3f37-48ec-bf01-c66414d3cfab" alt="Full MenuItem Lookup" width="500">
-      <p>
-        With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as: 
-      </p>
-      <p>
-        (1) Most popular item during X-month? 
-      </p>
-      <p>
-        (2) States with more carryout vs delivery during X-month(s)? 
-      </p>
-      <p>
-        (3) Average item count per order during X-months(s)?
-      </p>
-      <p>
-        Check out the full diagram on how I linked the tables:
-      </p>
-      <p>
-        <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f99a3934-79ba-41b0-9a9a-65ea16664860" alt="Diagram" width="800">
-      </p>
-    </div>
+    <table background-color="red" width="40">
+      <tr><td><p>1. Items are added from the menu and order created:</p></td></tr>
+      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400"></p></td></tr>
+      <tr><td><p>2. Order data is inserted into respective tables:</p></td></tr>
+      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="600"></p></tr></td>
+      <tr><td><p>3. Map catalog info from Orders:</p></td></tr>  
+      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/855395e0-3f37-48ec-bf01-c66414d3cfab" alt="Full MenuItem Lookup" width="500"></p></td></tr>
+      <tr><td><p>With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as:</p>
+        <p>(1) Most popular item during X-month?</p>
+        <p>(2) States with more carryout vs delivery during X-month(s)?</p>
+        <p>(3) Average item count per order during X-months(s)?</p>
+        <p>Check out the full diagram on how I linked the tables:</p>
+        <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f99a3934-79ba-41b0-9a9a-65ea16664860" alt="Diagram" width="800"></p></td></tr>
+      </td></tr>
+    </table>
 </li>
 </ol>
 
@@ -132,7 +114,7 @@ Application Name: Vennato's Pizza
 <ul>
   <li>
     <b>Understanding Component Life Cycles</b>
-    <p>I started to understand this concept when trying to display object properties in different components (such as OrderItem, Customer, Branch, etc.). I was first attempting to put them all as component properties and have them inherited. However, during testing I kept running into issues of objects being set to null which kept crashing my app. I didn't know why this was happening until I found out that component properties are essentially tied to their respective life cycles. This means they are temporary and reset once the cycle finishes which happens when you navigate away from the component (if I understand correctly). Around the same time, I also found out about Share State and what it does. So together with those two concepts in mind, I had to ask myself, <i> which object should I initialize directly in the component vs in the Shared State? </i> I basically boiled it down into one thing, <i>Does the initalized object need to change during the app session (two way binded) or does it not need to change (one way bind)? </i> Object properties such as a Customer's First and Last name need to change based on the user. Inversely, objects such as State doesn't have to change because a State name (i.e. Massachusetts) typically doesn't change. So for all changed data, I initialized in the Shared State and for non-changing data, I kept in the local component.</p>
+    <p>I learned this concept when trying to display object properties in different components (such as OrderItem, Customer, Branch, etc.). I was first attempting to put them all as component properties and have them inherited. However, during testing I kept running into issues of objects being set to null which kept crashing my app. I didn't know why this was happening until I found out that component properties are essentially tied to their respective life cycles. This means they are temporary and reset once the cycle finishes which happens when you navigate away from the component (if I understand correctly). Around the same time, I also found out about Share State and what it does. So together with those two concepts in mind, I had to ask myself, <i> which object should I initialize directly in the component vs in the Shared State? </i> I basically boiled it down into one thing, <i>does the initalized object need to change during the app session (two way binded) or does it not need to change (one way bind)? </i> Object properties such as a Customer's First and Last name need to change based on the user. Inversely, objects such as State doesn't have to change because a State name (i.e. Massachusetts) typically doesn't change. For all two-way bound data, I initialized in the Shared State and for single bind, I kept locally in the component.</p>
   </li>
   <li>
     <b>Learning about Shared State</b>
@@ -143,7 +125,7 @@ Application Name: Vennato's Pizza
   <li>
     <b>Finding out what a DTO is midway through the project</b>
     <p>
-      While working on the checkout process, I needed to find a way to package the session data to be inserted back into the database. After watching some videos, I stumble across the principle of Data Transfer Objects (DTOs). This was a huge concept that I think would've made the project easier if I had learned it at the beginning. It's basically a custom class object (above the data access layer) that groups only pertinant data from a class, that the user needs to see. With this concept, I was presented a fork in the road, <i>should I restructure the application to use DTOs, or should I proceed with the current setup?</i> Although the current setup was working fine, I ultimately decided to restructure the application. This was one of the biggest changes I made on the project. And since this change involved restructuring every project (database, class library and webapp), I ended up creating some sort of unit test first, where I made a simple version of the current solution, involving only the relevant classes, models, and components that were tied to this change. I tested the solution to make sure it works and then slowly began restructuring my current solution based on the test solution. In restrospect, I think this change was necessary. It made some of my components cleaner and easier to read/write. I was also able to clean up my database structure and also got good experience being able to spin up a new solution a lot quicker. 
+      While working on the checkout process, I needed to find a way to package the session data to be inserted back into the database. After watching some videos, I stumble across the principle of Data Transfer Objects (DTOs). This was a huge concept that I think would've made the project easier if I had learned it at the beginning. It's basically a custom class model located above the data access layer, designed to group only relevant data that users need to see. With this concept, I was presented a fork in the road, <i>should I restructure the application to use DTOs, or should I proceed with the current setup?</i> Although the current setup was working fine, I ultimately decided to restructure the application. This was one of the biggest changes I made on the project. And since this change involved restructuring every project (database, class library and webapp), I ended up creating some sort of unit test first, where I made a simple version of the current solution, involving only the relevant classes, models, and components that were tied to this change. I tested the solution to make sure it works and then slowly began restructuring my current solution based on the test solution. In restrospect, I think this change was necessary. It made some of my components cleaner and easier to read/write. I was also able to clean up my database structure and also got good experience being able to spin up a new solution a lot quicker. 
     </p>
     
   </li>
