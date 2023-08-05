@@ -65,13 +65,13 @@ Application Name: Vennato's Pizza
 <li>
   <h3>Product Catalog</h3>
 </li>
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="330">
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="330">
-  <p>- Displays full menu and all menu item details.
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="300">
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="300">
+  <p>- Displays full menu and all item details.
   <p>- Includes AddItem component for item selection. Includes dynamic two-way binded fields that immediately updates values.
 <li>
   <h3>Shopping Cart</h3>
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="330">
+  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="300">
   <p>- Allows quantity update and item removal and displays dynamic subtotal.
 </li>
 <li>
@@ -79,8 +79,8 @@ Application Name: Vennato's Pizza
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/9e21799e-285a-421a-be26-3dd28991f63b" alt="Checkout" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/046cdf90-a914-41ac-90b8-97bf27fb8ba2" alt="Data Validations" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/6c042ed4-a274-4c4b-b354-419e9b766220" alt="Checkout Flow Indicator" height="300">
-    <p>- Includes dynamic checkout flow that prefills info submitted before checkout.
-    <p>- Runs client-side data validations to check for incorrect inputs.
+    <p>- Includes dynamic checkout flow that prefills info submitted prior to checkout.
+    <p>- Runs client-side data validations to check for input errors.
     <p>- Includes a timeline that indicates checkout process step.
 </li>
 <li>
@@ -166,7 +166,7 @@ There were many features I wanted to include on the application that simply fell
 <p><ul>
   <li><b>Payment Transaction Service</b> - I would have liked to add some sort of payment processing microservice in with the application. But after researching, it seems that implementing a transaction service would open up a whole 'nother can of worms. At larger companies, these payment processes need to be audited in some fashion which would require detailed security configurations. I think I could figure out how to implement this but it would require a lot of bandwidth and time.  </li>
   <li><b>Email Notification Service</b> - Another service that fell out of scope due to time. Although, I did do research and found that I could probably add the service using Azure Functions and an email service such as Amazon SES or SendGrid. This might be something I can include on a future project.</li>
-  <li><b>Log In Service</b> - Like the payment transaction service, it seems like this would have required some additional microservice with detailed security enhancements. I wasn't able to produce this but at the very least, I did configure the application in a way that I felt can easily scale if deciding to add this in later. I'm not sure if this is orthodox practice, but I ended up duplicating the Customer table (now a Parent Model/no table) into the User and Guest tables (inherited Models/populated tables) with the ability to join either table on the Order table using a common attribute (CustomerType - CHAR, which is technically not a FK but serves similar functionality). That way, if I wanted to add a login service, the system could do a SELECT on just the User table. It wouldn't have to filter through all the guest information and only check returning customers' from the User table.</li>
+  <li><b>Log In Service</b> - Like the payment transaction service, it seems like this would have required some additional microservice with detailed security enhancements. I wasn't able to produce this but at the very least, I did configure the application in a way that I felt can easily scale if deciding to add this in later. I'm not sure if this is orthodox practice, but I ended up duplicating the Customer table (now a Parent Model/no table) into the User and Guest tables (inherited Models/populated tables) with the ability to join either table on the Order table using a common attribute (CustomerId - which is technically not an FK but serves similar functionality). That way, if I wanted to add a login service, the system could do a SELECT on just the User table. It wouldn't have to filter through all the guest information and only check returning customers' from the User table.</li>
 </ul>
 </p>
 
