@@ -13,8 +13,8 @@ Application Name: Vennato's Pizza
   <li><a href="#eurekamoments">Eureka Moments</a></li>
   <li><a href="#missedopportunities">Missed Opportunities</a></li>
   <li><a href="#helpfulresources">Helpful Resources</a></li>
-  <li><a href="imagereferencesheet">Image Reference Sheet</a></li>
-  <li><a href="contactinfo">Contact Info</a></li>
+  <li><a href="#imagereferencesheet">Image Reference Sheet</a></li>
+  <li><a href="#contactinfo">Contact Info</a></li>
 </ul>
 
 <h2 id="summary">Summary:</h2>
@@ -149,7 +149,7 @@ Application Name: Vennato's Pizza
   </li>
 </ul>
 
-<h2id="missedopportunities">Missed Opportunities:</h2>
+<h2 id="missedopportunities">Missed Opportunities:</h2>
 There were many features I wanted to include on the application that simply fell out of scope due to time constraints: 
 <p><ul>
   <li><b>Payment Transaction Service</b> - I would have liked to add some sort of payment processing microservice in with the application. But after researching, it seems that implementing a transaction service would open up a whole 'nother can of worms. At larger companies, these payment processes need to be audited in some fashion which would require detailed security configurations. I think I could figure out how to implement this but it would require a lot of bandwidth and time.  </li>
