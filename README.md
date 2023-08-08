@@ -10,7 +10,7 @@ Application Name: Vennato's Pizza
   <li>Background</li>
   <li>Technology</li>
   <li>Features</li>
-  <li><a href="eurekamoments">Eureka Moments</a></li>
+  <li><a href="#eurekamoments">Eureka Moments</a></li>
   <li>Missed Opportunities</li>
   <li>Helpful Resources</li>
   <li>Image Reference Sheet</li>
