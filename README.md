@@ -61,7 +61,7 @@ Application Name: Vennato's Pizza
 <p>
   In summary, the project was definitely a grind but also something I found to be very rewarding. In terms of technicality, the project itself is nowhere near perfect. There were several things I felt could have been improved upon but due to time constraints wasn't able to restructure. That being said, I still learned a lot and had tons of fun developing it. To name a few, my favorite parts were coming up with the products and pricing, designing the UX/UI, and implementing creative solutions to work around issues.
 </p>
-<a href="#backtotop">Back to Top></a>
+<a href="#backtotop" align="right">Back to Top</a>
 <h2 id="features">Features:</h2>
 <ol>
 <li>
