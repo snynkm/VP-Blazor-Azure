@@ -1,8 +1,8 @@
 # Pizza Ordering Application (Demo)
 
-<h3>Demo Link: 🔥🍕<a href="https://vennatospizza.azurewebsites.net/">Visit My Project Demo at Vennato's Pizza Website</a>🍕🔥 </h3>
-
-Application Name: Vennato's Pizza
+<p>Company Name: <b>Vennato's Pizza</b></p>
+<h3>Demo Link:🔥🍕<a href="https://vennatospizza.azurewebsites.net/">Visit My Project Demo at Vennato's Pizza Website</a>🍕🔥 </h3>
+<p>Visit my <a href="https://github.com/snynkm/snynkm">Github Profile</a>! 🙋‍♂️</p>
 
 <h2 id="backtotop">Table of Contents:</h2>
 <ul>
