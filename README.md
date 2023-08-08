@@ -18,7 +18,7 @@
 </ul>
 
 <h2 id="summary">Summary:</h2>
-<p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions. </p>
+<p> This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions.</p>
 
 <h2 id="technology">Technology:</h2>
 <p>Below are main technologies used for development:</p>
