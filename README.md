@@ -6,18 +6,18 @@ Application Name: Vennato's Pizza
 
 <h2>Table of Contents:</h2>
 <ul>
-  <li>Summary</li>
+  <li><a href="#summary">Summary</a></li>
   <li>Background</li>
   <li>Technology</li>
   <li>Features</li>
-  <li>Eureka Moments</li>
+  <li><a href="eurekamoments">Eureka Moments</a></li>
   <li>Missed Opportunities</li>
   <li>Helpful Resources</li>
   <li>Image Reference Sheet</li>
   <li>Contact Info</li>
 </ul>
 
-<h2> Summary:</h2>
+<h2 id="summary">Summary:</h2>
 <p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions. </p>
 
 <h2> Technology:</h2>
@@ -69,28 +69,33 @@ Application Name: Vennato's Pizza
 </li>
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="300">
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="300">
-  <p style="text-align: center;">- Displays full menu and all item details.
-  <p>- Includes AddItem component for item selection. Includes dynamic two-way binded fields that immediately updates values.
+  <ul> 
+    <li>Retrieves full catalog from database and displays it on the menu</li>
+    <li>Includes overlay component where useres can select items. Includes dynamic two-way binded fields that immediately updates values.</li>
+  </ul>
 <li>
   <h3>Shopping Cart</h3>
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="300">
-  <p>- Allows quantity update and item removal and displays dynamic subtotal.
+  <ul><li>Allows quantity update and item removal and displays dynamic subtotal.</li></ul>
 </li>
 <li>
   <h3>Dynamic Checkout Process & Order Submission</h3>
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/9e21799e-285a-421a-be26-3dd28991f63b" alt="Checkout" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/046cdf90-a914-41ac-90b8-97bf27fb8ba2" alt="Data Validations" height="300">
     <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/6c042ed4-a274-4c4b-b354-419e9b766220" alt="Checkout Flow Indicator" height="300">
-    <p>- Includes dynamic checkout flow that prefills info submitted prior to checkout.
-    <p>- Runs client-side data validations to check for input errors.
-    <p>- Includes a timeline that indicates checkout process step.
+    <ul>
+    <li>Includes dynamic checkout flow that prefills info submitted prior to checkout.</li>
+    <li>Runs client-side data validations to check for input errors.</li>
+    <li>Includes a timeline that indicates checkout process step.</li>
+    </ul>
 </li>
 <li>
   <h3>Business Analysis/Reporting</h3>
+      <ul>
+        <li>Scalable and queryable database design for back-end use. Once transactional data has been stored into the database, it can be easily queried and maintained.</li>
+      </ul>
       <p>
-       - This feature is designed for back-end use. At the start of the project, I made sure the transactional data was normalized (as best I could). All data in the database that involves customers and orders would be easy to scale and maintain. This also means that after data insertion, business analytics can go in and query against the database to gather business insight.
-      <p>
-        Below is an example of how order data is stored:
+        Below is an example of how data from the Order table is stored:
       </p>  
       </p>
     <table background-color="red" width="40">
@@ -101,9 +106,9 @@ Application Name: Vennato's Pizza
       <tr><td><p>3. Map catalog info from Orders:</p></td></tr>  
       <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/855395e0-3f37-48ec-bf01-c66414d3cfab" alt="Full MenuItem Lookup" width="500"></p></td></tr>
       <tr><td><p>With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as:</p>
-        <p>(1) Most popular item during X-month?</p>
-        <p>(2) States with more carryout vs delivery during X-month(s)?</p>
-        <p>(3) Average item count per order during X-months(s)?</p>
+        <p>(1) <i>Most popular item during X-month?</i></p>
+        <p>(2) <i>States with more carryout vs delivery during X-month(s)?</i>i></p>
+        <p>(3) <i>Average item count per order during X-months(s)?</i></p>
         <p>Check out the full diagram on how I linked the tables:</p>
         <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f99a3934-79ba-41b0-9a9a-65ea16664860" alt="Diagram" width="800"></p></td></tr>
       </td></tr>
@@ -111,7 +116,7 @@ Application Name: Vennato's Pizza
 </li>
 </ol>
 
-<h2> Eureka Moments:</h2> 
+<h2 id="eurekamoments">Eureka Moments:</h2> 
 <ul>
   <li>
     <b>Understanding Component Life Cycles</b>
