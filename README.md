@@ -115,7 +115,7 @@ Application Name: Vennato's Pizza
     </table>
 </li>
 </ol>
-
+<a href="#backtotop">Back to Top</a>
 <h2 id="eurekamoments">Eureka Moments:</h2> 
 <ul>
   <li>
@@ -158,15 +158,15 @@ There were many features I wanted to include on the application that simply fell
 </ul>
 </p>
 
-
+<a href="#backtotop">Back to Top</a>
 <h2 id="helpfulresources">Helpful Resources:</h2>
 <p>Tim Corey's Youtube channel helped me tremendously with a lot of the initial configurations for the project. I also visited various other channels on Youtube to help me understand broader topics. My <a href="https://github.com/snynkm/snynkm">Landing Page's</a> Self-Education section elaborates more on the resources I've used to help me get started as a .NET developer.</p>
-
+<a href="#backtotop">Back to Top</a>
 <h2 id="imagereferencesheet">Image Reference Sheet:</h2>
 <p>
   Image Url Reference Sheet: (https://github.com/snynkm/VP-Blazor-Azure/files/12285865/VP.Image.Url.Reference.Sheet.xlsx)
   </p>
-  
+  <a href="#backtotop">Back to Top</a>
 <h2 id="contactinfo">Contact Info:</h2>
 <p>
   Check out my <a href="https://github.com/snynkm/snynkm">Landing Page</a> to learn more about my goals and other projects!
