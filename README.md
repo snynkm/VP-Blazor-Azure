@@ -67,7 +67,7 @@
 <li>
   <h3>Product Catalog</h3>
 </li>
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/87fcd45a-b61d-4b75-840b-bef52fb4b2de" alt="Menu" height="300">
+  <img src="VpBlazorApp/assets/menu.PNG" alt="Menu" height="300">
   <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="300">
   <ul> 
     <li>Retrieves full catalog from database and displays it on the menu</li>
@@ -75,14 +75,14 @@
   </ul>
 <li>
   <h3>Shopping Cart</h3>
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/37f6ec42-351c-426c-980b-7f49edfbf239" alt="Menu" height="300">
+  <img src="VpBlazorApp/assets/shopping-cart.PNG" alt="Shopping Cart" height="300">
   <ul><li>Allows quantity update and item removal and displays dynamic subtotal.</li></ul>
 </li>
 <li>
   <h3>Dynamic Checkout Process & Order Submission</h3>
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/9e21799e-285a-421a-be26-3dd28991f63b" alt="Checkout" height="300">
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/046cdf90-a914-41ac-90b8-97bf27fb8ba2" alt="Data Validations" height="300">
-    <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/6c042ed4-a274-4c4b-b354-419e9b766220" alt="Checkout Flow Indicator" height="300">
+    <img src="VpBlazorApp/assets/validation-1.PNG" alt="Checkout" height="300">
+    <img src="VpBlazorApp/assets/validation-2.PNG" alt="Data Validations" height="300">
+    <img src="VpBlazorApp/assets/checkout-timeline.PNG" alt="Checkout Flow Indicator" height="300">
     <ul>
     <li>Includes dynamic checkout flow that prefills info submitted prior to checkout.</li>
     <li>Runs client-side data validations to check for input errors.</li>
@@ -98,19 +98,19 @@
         Below is an example of how data from the Order table is stored:
       </p>  
       </p>
-    <table background-color="red" width="40">
+    <table width="40">
       <tr><td><p>1. Items are added from the menu and order created:</p></td></tr>
-      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/73a230d0-917e-435e-bf94-5a72ced51c70" alt="Summary" width="400"></p></td></tr>
+      <tr><td><p><img src="VpBlazorApp/assets/confirm summary.PNG" alt="Summary" width="400"></p></td></tr>
       <tr><td><p>2. Order data is inserted into respective tables:</p></td></tr>
-      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/0489fd63-221d-41e8-ae0c-fc843dbf5673" alt="Normalized Data" width="600"></p></tr></td>
+      <tr><td><p><img src="VpBlazorApp/assets/ba-1.PNG" alt="Normalized Data" width="600"></p></tr></td>
       <tr><td><p>3. Map catalog info from Orders:</p></td></tr>  
-      <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/855395e0-3f37-48ec-bf01-c66414d3cfab" alt="Full MenuItem Lookup" width="500"></p></td></tr>
+      <tr><td><p><img src="VpBlazorApp/assets/ba-2.PNG" alt="Full MenuItem Lookup" width="500"></p></td></tr>
       <tr><td><p>With this database structure, and the ability to link these tables, from there you can perform more complex queries to solve business questions such as:</p>
         <p>(1) <i>Most popular item during X-month?</i></p>
         <p>(2) <i>States with more carryout vs delivery during X-month(s)?</i>i></p>
         <p>(3) <i>Average item count per order during X-months(s)?</i></p>
         <p>Check out the full diagram on how I linked the tables:</p>
-        <tr><td><p><img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/f99a3934-79ba-41b0-9a9a-65ea16664860" alt="Diagram" width="800"></p></td></tr>
+        <tr><td><p><img src="VpBlazorApp/assets/erd.PNG" alt="Diagram" width="800"></p></td></tr>
       </td></tr>
     </table>
 </li>
