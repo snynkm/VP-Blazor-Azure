@@ -4,23 +4,23 @@
 
 Application Name: Vennato's Pizza
 
-<h2>Table of Contents:</h2>
+<h2 id="backtotop">Table of Contents:</h2>
 <ul>
   <li><a href="#summary">Summary</a></li>
-  <li>Background</li>
-  <li>Technology</li>
-  <li>Features</li>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#technology">Technology</a></li>
+  <li><a href="#features">Features</a></li>
   <li><a href="#eurekamoments">Eureka Moments</a></li>
-  <li>Missed Opportunities</li>
-  <li>Helpful Resources</li>
-  <li>Image Reference Sheet</li>
-  <li>Contact Info</li>
+  <li><a href="#missedopportunities">Missed Opportunities</a></li>
+  <li><a href="#helpfulresources">Helpful Resources</a></li>
+  <li><a href="imagereferencesheet">Image Reference Sheet</a></li>
+  <li><a href="contactinfo">Contact Info</a></li>
 </ul>
 
 <h2 id="summary">Summary:</h2>
 <p>This is my first full-stack application project which is a demo Pizza Ordering Application. I wanted to create a website similar to company websites like Domino's and Little Caesars, where the user can check out menu items and order online. The Feature Section explains more of the application functions. </p>
 
-<h2> Technology:</h2>
+<h2 id="technology">Technology:</h2>
 <p>Below are main technologies used for development:</p>
 <table>
   <tr>
@@ -52,7 +52,7 @@ Application Name: Vennato's Pizza
 
 
 
-<h2> Background:</h2>
+<h2 id="background">Background:</h2>
 
 <p>
   Regarding the project's theme, I wanted to keep it simple - develop a Pizza App. I chose this idea for of a couple of reason. Firstly, I didn't know what else to think of. As a new developer, I didnt have the experience to come up with a sophisticated idea that solves a specific business problem. The latter reason more importantly, I felt that going with a Pizza App is something that many people are familiar with. My goal wasn't to oversell on the project idea, but to instead focus within the application and make sure it includes certain features and enhancements that really draw out a smooth user experience (hopefully). 
@@ -61,8 +61,8 @@ Application Name: Vennato's Pizza
 <p>
   In summary, the project was definitely a grind but also something I found to be very rewarding. In terms of technicality, the project itself is nowhere near perfect. There were several things I felt could have been improved upon but due to time constraints wasn't able to restructure. That being said, I still learned a lot and had tons of fun developing it. To name a few, my favorite parts were coming up with the products and pricing, designing the UX/UI, and implementing creative solutions to work around issues.
 </p>
-
-<h2>Features:</h2>
+<a href="#backtotop">Back to Top></a>
+<h2 id="features">Features:</h2>
 <ol>
 <li>
   <h3>Product Catalog</h3>
@@ -149,7 +149,7 @@ Application Name: Vennato's Pizza
   </li>
 </ul>
 
-<h2>Missed Opportunities:</h2>
+<h2id="missedopportunities">Missed Opportunities:</h2>
 There were many features I wanted to include on the application that simply fell out of scope due to time constraints: 
 <p><ul>
   <li><b>Payment Transaction Service</b> - I would have liked to add some sort of payment processing microservice in with the application. But after researching, it seems that implementing a transaction service would open up a whole 'nother can of worms. At larger companies, these payment processes need to be audited in some fashion which would require detailed security configurations. I think I could figure out how to implement this but it would require a lot of bandwidth and time.  </li>
@@ -159,15 +159,15 @@ There were many features I wanted to include on the application that simply fell
 </p>
 
 
-<h2>Helpful Resources:</h2>
+<h2 id="helpfulresources">Helpful Resources:</h2>
 <p>Tim Corey's Youtube channel helped me tremendously with a lot of the initial configurations for the project. I also visited various other channels on Youtube to help me understand broader topics. My <a href="https://github.com/snynkm/snynkm">Landing Page's</a> Self-Education section elaborates more on the resources I've used to help me get started as a .NET developer.</p>
 
-<h2>Image Reference Sheet:</h2>
+<h2 id="imagereferencesheet">Image Reference Sheet:</h2>
 <p>
   Image Url Reference Sheet: (https://github.com/snynkm/VP-Blazor-Azure/files/12285865/VP.Image.Url.Reference.Sheet.xlsx)
   </p>
   
-<h2>Contact Info:</h2>
+<h2 id="contactinfo">Contact Info:</h2>
 <p>
   Check out my <a href="https://github.com/snynkm/snynkm">Landing Page</a> to learn more about my goals and other projects!
 </p>
