@@ -68,7 +68,7 @@
   <h3>Product Catalog</h3>
 </li>
   <img src="VpBlazorApp/assets/menu.PNG" alt="Menu" height="300">
-  <img src="https://github.com/snynkm/VP-Blazor-Azure/assets/114448769/85377337-90d7-4290-9a36-95e5fa7b4e2e" alt="AddItem component" height="300">
+  <img src="VpBlazorApp/assets/additem.PNG" alt="AddItem component" height="300">
   <ul> 
     <li>Retrieves full catalog from database and displays it on the menu</li>
     <li>Includes overlay component where useres can select items. Includes dynamic two-way binded fields that immediately updates values.</li>
